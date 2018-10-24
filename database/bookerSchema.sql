@@ -2,11 +2,11 @@ CREATE DATABASE IF NOT EXISTS booker;
 
 USE booker;
 
-CREATE TABLE specials (
-	id INT NOT NULL AUTO_INCREMENT,
-	content VARCHAR(200),
-	PRIMARY KEY (id)
-);
+-- CREATE TABLE specials (
+-- 	id INT NOT NULL AUTO_INCREMENT,
+-- 	content VARCHAR(200),
+-- 	PRIMARY KEY (id)
+-- );
 
 CREATE TABLE listings (
   id INT NOT NULL AUTO_INCREMENT,
@@ -15,15 +15,16 @@ CREATE TABLE listings (
   service_fee INT,
   special_flag INT,
   rating INT,
-	PRIMARY KEY (id),
-	FOREIGN KEY (special_flag) REFERENCES specials(`id`)
+	views INT,
+	PRIMARY KEY (id)
+	-- FOREIGN KEY (special_flag) REFERENCES specials(`id`)
 );
 
 CREATE TABLE unavailabilities (
   id INT NOT NULL AUTO_INCREMENT,
 	listing INT,
 	month_day INT,
-	no_avail VARCHAR(50),
+	booked INT,
 	PRIMARY KEY (id),
 	FOREIGN KEY (listing) REFERENCES listings(`id`)
 );
