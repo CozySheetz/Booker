@@ -1,6 +1,9 @@
 import React from "react";
 import axios from "axios";
 import Header from "./Header.jsx";
+import Dates from "./Dates.jsx";
+import Guests from "./Guests.jsx";
+import Special from "./Special.jsx";
 
 class App extends React.Component {
 	constructor(props) {
@@ -30,7 +33,12 @@ class App extends React.Component {
 	render() {
 		return (
 			<div>
-				<Header listing={this.state.listing}/>
+				<Header listing={this.state.listing}/><br/>
+				<Dates /><br/>
+				<Guests />
+				<button>Request to Book</button>
+				<div>You won't be charged yet</div>
+				<Special />
 			</div>
 		)
 	}

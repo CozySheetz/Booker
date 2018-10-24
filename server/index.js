@@ -24,11 +24,6 @@ app.get('/sampleData', (req, res) => {
   res.send('sample data populated into database');
 })
 
-app.get('/', (req, res) => {
-  res.send('root');
-})
-
-
 app.get('/listings/:id', (req, res) => {
   var listingId = req.params.id;
 

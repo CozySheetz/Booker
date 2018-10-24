@@ -9,7 +9,8 @@ class Header extends React.Component {
 	render() {
 		return (
 			<div>
-				<span>${this.props.listing.daily_rate}</span> per night
+				<div>${this.props.listing.daily_rate} per night</div>
+				<div>Rating: {this.props.listing.rating}</div>
 			</div>
 		)
 	}
