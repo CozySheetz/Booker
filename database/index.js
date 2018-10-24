@@ -10,7 +10,7 @@ var connection = mysql.createConnection({
  
 connection.connect();
 
-var saveBooking = (booking, callback) => {
+const saveBooking = (booking, callback) => {
   var sql = `insert into bookings (id, etc) values (?, ?)` 
 	var input = [x, y];
 
@@ -23,7 +23,17 @@ var saveBooking = (booking, callback) => {
 	})
 } 
 
-
+const getAllFromTable = (table, callback) => {
+	var sql = `select * from ${table}`;
+	
+	connection.query(sql, (err, result) => {
+		if (err) {
+			console.log(err);
+		} else {
+			callback(result);
+		}
+	})
+}
 
 // connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
 	//   if (error) throw error;
@@ -32,3 +42,4 @@ var saveBooking = (booking, callback) => {
 	
 module.exports.saveBooking = saveBooking;
 module.exports.connection = connection;
+module.exports.getAllFromTable = getAllFromTable;

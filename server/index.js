@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const path = require('path');
 const { injectTestDataListings } = require('./../database/populate.js');
 const { injectTestDataUnavailabilities } = require('./../database/populate.js');
+const { getAllFromTable } = require('./../database/index.js');
 
 const app = express();
 const port = process.env.PORT || 3003;
@@ -18,13 +19,16 @@ app.get('/test', (req, res) => {
 app.get('/sampleData', (req, res) => {
   injectTestDataListings();
   injectTestDataUnavailabilities();
-  
+
   console.log('sample data populated into database')
   res.send('sample data populated into database');
 })
 
 app.get('/listing', (req, res) => {
-
+  console.log('GET /listing request recieved');
+  getAllFromTable('listings', (data) => {
+    console.log('data from listings table: ', data);
+  });
 })
 
 app.get('/availability', (req, res) => {
