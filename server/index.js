@@ -28,40 +28,45 @@ app.get('/', (req, res) => {
   res.send('root');
 })
 
-app.get('/*', (req, res) => {
-  var uri = req.url.slice(1);
-  res.sendFile(path.join(__dirname + '/../client/dist/index.html'));
-  // getListing(uri, (data) => {
-  //   console.log('data from db', data);
-  //   res.send(data);
-  // })
+
+app.get('/listings/:id', (req, res) => {
+  var listingId = req.params.id;
+
+  getListing(listingId, (data) => {
+    console.log('data from db', data);
+    res.send(data);
+  });
+    
 })
 
+// app.get('/unavailabilities/:id', (req, res) => {
+//   var listingId = req.params.id;
+
+//   getListing(listingId, (data) => {
+//     console.log('data from db', data);
+//     res.send(data);
+//   });
+    
+// })
+  
 app.post('/check-in', (req, res) => {
   
 })
 
 app.post('/book', (req, res) => {
+  
+})
 
+app.get('/*', (req, res) => {
+  var uri = req.url.slice(1);
+  console.log('GET where * = ', uri)
+
+  res.sendFile(path.join(__dirname + '/../client/dist/index.html'));
 })
 
 // set up port connection
-
 app.listen(port, function() {
   console.log('listening on port 3003!');
 });
-
-
-// app.get('/listings', (req, res) => {
-//   getAllFromTable('listings', (data) => {
-//     console.log('all data from listings table: ', data);
-//     res.send(data);
-//   });
-// })
-
-// app.get('/unavailability', (req, res) => {
-//   getAllFromTable('unavailabilities', (data) => {
-//     console.log('all data from unavailabilities table: ', data);
-//     res.send(data);
-//   });
-// })
+  
+  

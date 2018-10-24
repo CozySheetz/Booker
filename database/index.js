@@ -35,11 +35,11 @@ const getAllFromTable = (table, callback) => {
 	})
 }
 
-const getListing = (listing, callback) => {
+const getListing = (listingId, callback) => {
 
 	// console.log('database side', listing);
 
-	var sql = `select * from listings where id = ${listing}`;
+	var sql = `select * from listings where id = ${listingId}`;
 
 	connection.query(sql, (err, result) => {
 		if (err) {

@@ -7,21 +7,29 @@ class App extends React.Component {
 		super(props);
 
 		this.state = {
-			listing: {}
+			listing: {},
+			unavailability: {}
 		}
 	}
 
 	componentDidMount() {
-		axios.get('./*').then((res) => {
-			console.log('from server to front end', res.body);
+		var url = window.location.href;
+		var id = url.slice(22);
+		console.log('this id', id);
+
+		axios.get(`/listings/${id}`).then((res) => {
+			console.log('from server to front end', res.data[0]);
+			this.setState({
+				listing: res.data[0]
+			})
 		})
+
+		axios.get('/')
 	}
 
 	render() {
 		return (
 			<div>
-				Input listing:
-				<input/>
 				<Header listing={this.state.listing}/>
 			</div>
 		)
