@@ -7,6 +7,7 @@ class Guests extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			totalGuests: 1,
 			guests: [
 				{
 					id: 0,
@@ -28,18 +29,18 @@ class Guests extends React.Component {
 				},
 			]
 		}
-		this.resetThenSet = this.resetThenSet.bind(this);
+		// this.resetThenSet = this.resetThenSet.bind(this);
 		this.toggleSelected = this.toggleSelected.bind(this);
 	}
 
-	resetThenSet(id, key) {
-		let temp = JSON.parse(JSON.stringify(this.state[key]));
-		temp.forEach(item => item.selected = false);
-		temp[id].selected = true;
-		this.setState({
-			[key]: temp
-		});
-	}
+	// resetThenSet(id, key) {
+	// 	let temp = JSON.parse(JSON.stringify(this.state[key]));
+	// 	temp.forEach(item => item.selected = false);
+	// 	temp[id].selected = true;
+	// 	this.setState({
+	// 		[key]: temp
+	// 	});
+	// }
 
 	toggleSelected(id, key) {
 		let temp = JSON.parse(JSON.stringify(this.state[key]));
@@ -56,20 +57,22 @@ class Guests extends React.Component {
 		margin-bottom: 200px;
 		`;	
 
+		var dynamicDropdownTitle = this.state.totalGuests === 1 ? `${this.state.totalGuests} guest` : `${this.state.totalGuests} guests` 
+
 		return (
 			<div>
 				<H5>Guests</H5>
-				<Dropdown
+				{/* <Dropdown
 					title="1 Guest"
-					list={this.state.fruit}
-					resetThenSet={this.resetThenSet}
-				/>
-				{/* <DropdownMultiple
-  				titleHelper="Location"
-					title="Select location"
-					list={this.state.location}
-					toggleItem={this.toggleSelected}
+					list={this.state.guests}
+					// resetThenSet={this.resetThenSet}
 				/> */}
+				<DropdownMultiple
+  				titleHelper="Location"
+					title={dynamicDropdownTitle}
+					list={this.state.guests}
+					toggleItem={this.toggleSelected}
+				/>
 			</div>
 		)
 	}

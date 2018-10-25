@@ -31,7 +31,7 @@ class App extends React.Component {
 
 	render() {
 		const Box = styled.section`
-		padding: 1.4em
+		padding: 2em
 		border: 1px solid
 		border-color: #E4E4E4
 		width: 376px
