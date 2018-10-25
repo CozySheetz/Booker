@@ -1,7 +1,10 @@
 body {
 margin: 10px;
 margin-top: 10px;
-font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif 
+font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+font-size: 12px;
+font-weight: 400;
+color: #484848;
 }
   
 a {

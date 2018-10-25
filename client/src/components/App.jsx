@@ -32,9 +32,29 @@ class App extends React.Component {
 	render() {
 		const Box = styled.section`
 		padding: 1.4em
-		border: 1px solid grey
-		width: 33%
+		border: 1px solid
+		border-color: #E4E4E4
+		width: 376px
 		`;
+
+		const Content = styled.section`
+		width: 100%
+		`
+
+		const Button = styled.button`
+		border-radius: 4px
+		background-color: #FC5C63
+		color: white
+		width: 326px
+		height: 50px
+		margin-top: 20px
+		margin-bottom: 20px
+		`
+
+		const Book = styled.span`
+		font-size: 16px
+		font-weight: bold
+		`
 
 		// const MainContainer = styled.container`
 		// margin-top: 16px
@@ -44,12 +64,14 @@ class App extends React.Component {
 		return (
 			<div>
 				<Box>
-					<Header listing={this.state.listing}/><br/>
-					<Dates /><br/>
-					<Guests />
-					<button>Request to Book</button>
-					<div>You won't be charged yet</div>
-					<Special />
+					<Content>
+						<Header listing={this.state.listing}/><br/>
+						<Dates /><br/>
+						<Guests />
+						<Button><Book>Request to Book</Book></Button>
+						<div>You won't be charged yet</div>
+						<Special />
+					</Content>
 				</Box>
 			</div>
 		)
