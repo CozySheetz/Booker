@@ -27,8 +27,6 @@ class App extends React.Component {
 				listing: res.data[0]
 			})
 		})
-
-		axios.get('/')
 	}
 
 	render() {
@@ -37,6 +35,12 @@ class App extends React.Component {
 		border: 1px solid grey
 		width: 33%
 		`;
+
+		// const MainContainer = styled.container`
+		// margin-top: 16px
+		// margin-bottom: 24px
+		// `;
+
 		return (
 			<div>
 				<Box>
