@@ -31,11 +31,11 @@ class App extends React.Component {
 		axios.get('/')
 	}
 
-
 	render() {
 		const Box = styled.section`
-		padding: 5em
-		border: 2px solid
+		padding: 1.4em
+		border: 1px solid grey
+		width: 33%
 		`;
 		return (
 			<div>
