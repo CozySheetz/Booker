@@ -1,6 +1,6 @@
 const { connection } = require('./index.js')
 
-var injectTestDataListings = (callback) => {
+var injectTestDataListings = () => {
 	connection.query(`
 	insert into listings 
 		(id, daily_rate, cleaning_fee, service_fee, special_flag, rating, views) 
@@ -11,13 +11,11 @@ var injectTestDataListings = (callback) => {
 	`, (err, result) => {
 		if (err) {
 			console.log(err);
-		} else {
-			res.status(201).send(result);
 		}
 	})
 };
 
-var injectTestDataUnavailabilities = (callback) => {
+var injectTestDataUnavailabilities = () => {
 	connection.query(`
 	insert into unavailabilities 
 		(id, listing, month_day, booked) 
@@ -32,8 +30,6 @@ var injectTestDataUnavailabilities = (callback) => {
 	`, (err, result) => {
 		if (err) {
 			console.log(err);
-		} else {
-			res.status(201).send(result);
 		}
 	})
 }
