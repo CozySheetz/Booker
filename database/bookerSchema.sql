@@ -41,6 +41,4 @@ CREATE TABLE bookings (
 	FOREIGN KEY (listing) REFERENCES listings(`id`) 
 );
 
-
-
 -- mysql -u root < database/bookerSchema.sql
