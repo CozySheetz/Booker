@@ -1,6 +1,8 @@
 import React from "react";
 import styled from 'styled-components';
-import AdultsCounter from './AdultsCounter.jsx'
+import AdultsCounter from './AdultsCounter.jsx';
+import ChildrenCounter from './ChildrenCounter.jsx';
+import InfantCounter from './InfantCounter.jsx';
 
 
 class Guests extends React.Component {
@@ -44,8 +46,13 @@ class Guests extends React.Component {
 		outline: none;
 		font-size: 15px;
 		position: relative;
-		
 		`
+
+		const ContainerDiv = styled.div`
+		margin-top: 50px;
+		margin-bottom: 50px;
+		`
+
 		// var dynamicDropdownTitle = this.state.totalGuests === 1 ? `${this.state.totalGuests} guest` : `${this.state.totalGuests} guests` 
 	
 		return (
@@ -53,7 +60,18 @@ class Guests extends React.Component {
 				<H5>Guests</H5>
 				<CollapseButton onClick={this.handleClick} className="collapsible">1 guest</CollapseButton>
 				<div className="content">
-					<AdultsCounter/>
+					<ContainerDiv>
+						<AdultsCounter/>
+					</ContainerDiv>
+					<ContainerDiv>
+						<ChildrenCounter />
+					</ContainerDiv>
+					<ContainerDiv>
+						<InfantCounter />
+					</ContainerDiv>
+					<div>
+						2 guests maximum. Infants don’t count toward the number of guests.
+					</div>
 				</div>
 			</div>
 		)

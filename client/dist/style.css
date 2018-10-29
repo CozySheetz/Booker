@@ -111,9 +111,9 @@ content: "\2796"; /* Unicode character for "minus" sign (-) */
 }
 
 .left {
-  float: left;
+  align-content: left;
 }
 
 .right {
-  float: right;
+  align-content: right;
 }
