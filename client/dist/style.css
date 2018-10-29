@@ -81,3 +81,39 @@ color: #a33;
 padding: 10px;
 margin: 0 10px;
 }
+
+.active, .collapsible:hover {
+background-color:white;
+}
+
+.content {
+padding: 0 18px;
+background-color: white;
+overflow: hidden;
+display: none;
+position: absolute;
+border: 1px solid;
+width: 288px;
+border-color: #E4E4E4;
+box-shadow: 100px
+}
+
+.collapsible:after {
+content: '\02795'; /* Unicode character for "plus" sign (+) */
+font-size: 13px;
+color: white;
+float: right;
+margin-left: 5px;
+}
+
+.active:after {
+content: "\2796"; /* Unicode character for "minus" sign (-) */
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}

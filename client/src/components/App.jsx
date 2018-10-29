@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import Header from "./Header.jsx";
 import Dates from "./Dates.jsx";
+import GuestsOLD from "./GuestsOLD.jsx";
 import Guests from "./Guests.jsx";
 import Special from "./Special.jsx";
 import styled from "styled-components";
@@ -67,6 +68,7 @@ class App extends React.Component {
 					<Content>
 						<Header listing={this.state.listing}/><br/>
 						<Dates /><br/>
+						{/* <GuestsOLD /> */}
 						<Guests />
 						<Button><Book>Request to Book</Book></Button>
 						<div>You won't be charged yet</div>
