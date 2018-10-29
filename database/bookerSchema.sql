@@ -1,4 +1,6 @@
-CREATE DATABASE IF NOT EXISTS booker;
+DROP DATABASE IF EXISTS booker;
+
+CREATE DATABASE booker;
 
 USE booker;
 
@@ -16,6 +18,7 @@ CREATE TABLE listings (
   special_flag INT,
   rating INT,
 	views INT,
+	max_guests INT NOT NULL,
 	PRIMARY KEY (id)
 	-- FOREIGN KEY (special_flag) REFERENCES specials(`id`)
 );

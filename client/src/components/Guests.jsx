@@ -9,9 +9,14 @@ class Guests extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			totalGuests: 1
+			maxGuests: this.props.listing.max_guests,
+			maxReached: false,
+			currentGuests: 1,
+			dropDown: false
+
 		}
 		this.handleClick = this.handleClick.bind(this);
+		this.changeTotal = this.changeTotal.bind(this);
 	}
 	
 	handleClick(e) {
@@ -22,8 +27,36 @@ class Guests extends React.Component {
       content.style.display = "none";
     } else {
       content.style.display = "block";
-    }
+		}
+		
+		var newDropDown = this.state.dropDown ? false : true;
+		this.setState({
+			dropDown: newDropDown
+		})
 
+	}
+
+	changeTotal(num) {
+		// console.log('oigogogogog');
+		if (num === 1) {
+			let oldTotal = this.state.currentGuests;
+			let newTotal = oldTotal + 1;
+			this.setState({
+				currentGuests: newTotal
+			}, () => {
+				if (this.state.currentGuests === this.state.maxGuests) {
+					this.setState({
+						maxReached: true
+					})
+				}
+			});
+			
+		} else if (num === -1) {
+			let newTotal = this.state.currentGuests - 1;
+			this.setState({
+				currentGuests: newTotal
+			})
+		}
 	}
 
 	render() {
@@ -53,15 +86,13 @@ class Guests extends React.Component {
 		margin-bottom: 50px;
 		`
 
-		// var dynamicDropdownTitle = this.state.totalGuests === 1 ? `${this.state.totalGuests} guest` : `${this.state.totalGuests} guests` 
-	
 		return (
 			<div>
 				<H5>Guests</H5>
-				<CollapseButton onClick={this.handleClick} className="collapsible">1 guest</CollapseButton>
+				<CollapseButton onClick={this.handleClick} className="collapsible">{this.state.currentGuests} guests</CollapseButton>
 				<div className="content">
 					<ContainerDiv>
-						<AdultsCounter/>
+						<AdultsCounter maxReached={this.state.maxReached} changeTotal={this.changeTotal}/>
 					</ContainerDiv>
 					<ContainerDiv>
 						<ChildrenCounter />
@@ -72,6 +103,7 @@ class Guests extends React.Component {
 					<div>
 						2 guests maximum. Infants don’t count toward the number of guests.
 					</div>
+					<br/>
 				</div>
 			</div>
 		)

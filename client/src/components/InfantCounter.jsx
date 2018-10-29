@@ -8,7 +8,7 @@ class InfantCounter extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			infantTotal: 1
+			infantTotal: 0
 		}
 		this.handleClickRemove = this.handleClickRemove.bind(this);
 		this.handleClickAdd = this.handleClickAdd.bind(this);

@@ -68,7 +68,7 @@ class App extends React.Component {
 						<Header listing={this.state.listing}/><br/>
 						<Dates /><br/>
 						{/* <GuestsOLD /> */}
-						<Guests />
+						<Guests listing={this.state.listing}/>
 						<Button><Book>Request to Book</Book></Button>
 						<div>You won't be charged yet</div>
 						<Special />

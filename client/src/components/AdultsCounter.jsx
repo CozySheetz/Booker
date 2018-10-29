@@ -21,19 +21,21 @@ class AdultsCounter extends React.Component {
 			var newTotal = this.state.totalAdults - 1;
 			this.setState({
 				totalAdults: newTotal
-			})
+			}, () => this.props.changeTotal(-1))
 		}
 	}
 
 	handleClickAdd(e) {
 		e.preventDefault();
 
-		if (this.state.totalAdults < 4) {
+		if (!this.props.maxReached) {
 			
 			var newTotal = this.state.totalAdults + 1;
 			this.setState({
 				totalAdults: newTotal
 			})
+
+			this.props.changeTotal(1)
 		}
 	}
 
@@ -79,7 +81,7 @@ class AdultsCounter extends React.Component {
 							<span>{this.state.totalAdults}</span>
 						</TotalSpan>
 						<AddButtonSpan>
-							<IconContext.Provider value={{ color: '#128488', size: "3em" }}>
+							<IconContext.Provider value={this.props.maxReached ? { color: '#B7DADB', size: "3em" } : { color: '#128488', size: "3em" }}>
 								<IoIosAddCircleOutline onClick={this.handleClickAdd}/>
 							</IconContext.Provider>
 						</AddButtonSpan>
