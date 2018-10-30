@@ -30,7 +30,7 @@ class Header extends React.Component {
 						starColor={starColor}
 						starCount={5}
 						value={stars}
-					/><span>{this.props.listing.views}</span>
+					/><span>{this.props.listing.ratings_count}</span>
 				</div>
 			</div>
 		)

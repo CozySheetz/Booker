@@ -3,11 +3,11 @@ const { connection } = require('./index.js')
 var injectTestDataListings = () => {
 	connection.query(`
 	insert into listings 
-		(id, daily_rate, cleaning_fee, service_fee, special_flag, rating, views, max_guests) 
+		(id, daily_rate, cleaning_fee, service_fee, special_flag, rating, views, max_guests, ratings_count) 
 	values 
-		(1, 100, 25, 25, 0, 4, 199, 3),
-		(2, 300, 30, 25, 1, 5, 286, 4),
-		(3, 50, 20, 25, 1, 3, 522, 2)
+		(1, 100, 25, 25, 0, 4, 199, 3, 125),
+		(2, 300, 30, 25, 1, 5, 286, 4, 46),
+		(3, 50, 20, 25, 1, 3, 522, 2, 89)
 	`, (err, result) => {
 		if (err) {
 			console.log(err);

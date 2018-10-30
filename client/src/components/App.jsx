@@ -56,6 +56,21 @@ class App extends React.Component {
 		font-weight: bold
 		`
 
+		const Line = styled.div`
+		border-bottom: 1px solid #E4E4E4;
+		margin-bottom: 20px;
+		`
+
+		const BottomLine = styled.div`
+		border-bottom: 1px solid #E4E4E4;
+		margin-top: 20px;
+		margin-bottom: 20px;
+		`
+
+		const MemoDiv = styled.div`
+		text-align: center;
+		font-weight: 400;
+		`
 		// const MainContainer = styled.container`
 		// margin-top: 16px
 		// margin-bottom: 24px
@@ -66,12 +81,13 @@ class App extends React.Component {
 				<Box>
 					<Content>
 						<Header listing={this.state.listing}/><br/>
+						<Line />
 						<Dates /><br/>
-						{/* <GuestsOLD /> */}
 						<Guests listing={this.state.listing}/>
 						<Button><Book>Request to Book</Book></Button>
-						<div>You won't be charged yet</div>
-						<Special />
+						<MemoDiv>You won't be charged yet</MemoDiv>
+						<BottomLine />
+						<Special listing={this.state.listing}/>
 					</Content>
 				</Box>
 			</div>

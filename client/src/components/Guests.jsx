@@ -20,7 +20,7 @@ class Guests extends React.Component {
 	}
 	
 	handleClick(e) {
-		e.target.classList.toggle("active");
+		console.log('classss', e.target.classList);
 
 		var content = e.target.nextElementSibling;
 		if (content.style.display === "block") {
@@ -29,10 +29,6 @@ class Guests extends React.Component {
       content.style.display = "block";
 		}
 		
-		var newDropDown = this.state.dropDown ? false : true;
-		this.setState({
-			dropDown: newDropDown
-		})
 	}
 
 	handleIncrement(type, num) {
@@ -114,8 +110,8 @@ class Guests extends React.Component {
 		`
 
 		const ContainerDiv = styled.div`
-		margin-top: 50px;
-		margin-bottom: 50px;
+		padding-top: 30px;
+		padding-bottom: 30px;
 		`
 
 		const FooterDiv = styled.div`
@@ -155,9 +151,9 @@ class Guests extends React.Component {
 							min={this.state.currentInfants === 0 ? true : false}
 						/>
 					</ContainerDiv>
-					{/* <div>
-						2 guests maximum. Infants don’t count toward the number of guests.
-					</div> */}
+					<ContainerDiv>
+						{this.state.maxGuests} guests maximum. Infants don’t count toward the number of guests.
+					</ContainerDiv>
 					<br/>
 				</div>
 			</div>

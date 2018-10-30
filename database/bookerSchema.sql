@@ -19,6 +19,7 @@ CREATE TABLE listings (
   rating INT,
 	views INT,
 	max_guests INT NOT NULL,
+	ratings_count INT,
 	PRIMARY KEY (id)
 	-- FOREIGN KEY (special_flag) REFERENCES specials(`id`)
 );

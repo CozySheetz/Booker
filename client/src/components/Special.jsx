@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 import axios from "axios";
 
 class Special extends React.Component {
@@ -7,10 +8,21 @@ class Special extends React.Component {
 	}
 
 	render() {
+
+		const DivStrong = styled.div`
+		font-weight: 500;
+		font-size: 14px;
+		`
+
+		const Div = styled.div`
+		font-weight: 300;
+		font-size: 14px;
+		`
+
 		return (
 			<div>
-				<p>This home is on people’s minds.</p>
-				<p>It’s been viewed 262 times in the past week.</p>
+				<DivStrong>This home is on people’s minds.</DivStrong>
+				<Div>It’s been viewed {this.props.listing.views} times in the past week.</Div>
 			</div>
 		)
 	}
