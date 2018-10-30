@@ -7,38 +7,11 @@ import { IconContext } from "react-icons";
 class InfantCounter extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			infantTotal: 0
-		}
-		this.handleClickRemove = this.handleClickRemove.bind(this);
-		this.handleClickAdd = this.handleClickAdd.bind(this);
-	}
-
-	handleClickRemove(e) {
-		e.preventDefault();
-		if (this.state.infantTotal !== 0) {
-			
-			var newTotal = this.state.infantTotal - 1;
-			this.setState({
-				infantTotal: newTotal
-			})
-		}
-	}
-
-	handleClickAdd(e) {
-		e.preventDefault();
-
-		if (this.state.infantTotal < 4) {
-			
-			var newTotal = this.state.infantTotal + 1;
-			this.setState({
-				infantTotal: newTotal
-			})
-		}
+		
 	}
 
 	render() {
-
+	
 		const Name = styled.div`
 		font-weight: bold;
 		float: left;
@@ -66,21 +39,21 @@ class InfantCounter extends React.Component {
 		return (
 			<div>
 				<div className="left">
-					<Name>Infants</Name><br/>
+					<Name>Infants</Name>
 				</div>
 				<div className="right">
 					<Counter>
-						<RemoveButtonSpan>
-							<IconContext.Provider value={this.state.infantTotal > 0 ? { color: '#128488', size: "3em" } : { color: '#B7DADB', size: "3em" }}>
-								<IoIosRemoveCircleOutline onClick={this.handleClickRemove}/>
+						<RemoveButtonSpan >
+							<IconContext.Provider value={this.props.currentInfants === 0 ? { color: '#B7DADB', size: "3em" } : { color: '#128488', size: "3em" }}>
+								<IoIosRemoveCircleOutline onClick={(e) => {this.props.handleIncrement("infants", -1)}}/>
 							</IconContext.Provider>
 						</RemoveButtonSpan>
 						<TotalSpan>
-							<span>{this.state.infantTotal}</span>
+							<span>{this.props.currentInfants}</span>
 						</TotalSpan>
 						<AddButtonSpan>
-							<IconContext.Provider value={{ color: '#128488', size: "3em" }}>
-								<IoIosAddCircleOutline onClick={this.handleClickAdd}/>
+							<IconContext.Provider value={this.props.limit? { color: '#B7DADB', size: "3em" } : { color: '#128488', size: "3em" }}>
+								<IoIosAddCircleOutline onClick={(e) => {this.props.handleIncrement("infants", 1)}}/>
 							</IconContext.Provider>
 						</AddButtonSpan>
 					</Counter>

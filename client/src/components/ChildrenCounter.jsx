@@ -7,38 +7,11 @@ import { IconContext } from "react-icons";
 class ChildrenCounter extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			totalChildren: 0
-		}
-		this.handleClickRemove = this.handleClickRemove.bind(this);
-		this.handleClickAdd = this.handleClickAdd.bind(this);
-	}
-
-	handleClickRemove(e) {
-		e.preventDefault();
-		if (this.state.totalChildren !== 0) {
-			
-			var newTotal = this.state.totalChildren - 1;
-			this.setState({
-				totalChildren: newTotal
-			})
-		}
-	}
-
-	handleClickAdd(e) {
-		e.preventDefault();
-
-		if (this.state.totalChildren < 4) {
-			
-			var newTotal = this.state.totalChildren + 1;
-			this.setState({
-				totalChildren: newTotal
-			})
-		}
+		
 	}
 
 	render() {
-
+	
 		const Name = styled.div`
 		font-weight: bold;
 		float: left;
@@ -66,21 +39,21 @@ class ChildrenCounter extends React.Component {
 		return (
 			<div>
 				<div className="left">
-					<Name>Children</Name><br/>
+					<Name>Children</Name>
 				</div>
 				<div className="right">
 					<Counter>
-						<RemoveButtonSpan>
-							<IconContext.Provider value={this.state.totalChildren > 0 ? { color: '#128488', size: "3em" } : { color: '#B7DADB', size: "3em" }}>
-								<IoIosRemoveCircleOutline onClick={this.handleClickRemove}/>
+						<RemoveButtonSpan >
+							<IconContext.Provider value={this.props.currentChildren === 0 ? { color: '#B7DADB', size: "3em" } : { color: '#128488', size: "3em" }}>
+								<IoIosRemoveCircleOutline onClick={(e) => {this.props.handleIncrement("children", -1)}}/>
 							</IconContext.Provider>
 						</RemoveButtonSpan>
 						<TotalSpan>
-							<span>{this.state.totalChildren}</span>
+							<span>{this.props.currentChildren}</span>
 						</TotalSpan>
 						<AddButtonSpan>
-							<IconContext.Provider value={{ color: '#128488', size: "3em" }}>
-								<IoIosAddCircleOutline onClick={this.handleClickAdd}/>
+							<IconContext.Provider value={this.props.limit? { color: '#B7DADB', size: "3em" } : { color: '#128488', size: "3em" }}>
+								<IoIosAddCircleOutline onClick={(e) => {this.props.handleIncrement("children", 1)}}/>
 							</IconContext.Provider>
 						</AddButtonSpan>
 					</Counter>

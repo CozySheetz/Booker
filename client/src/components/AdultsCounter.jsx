@@ -7,36 +7,7 @@ import { IconContext } from "react-icons";
 class AdultsCounter extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			totalAdults: 1
-		}
-		this.handleClickRemove = this.handleClickRemove.bind(this);
-		this.handleClickAdd = this.handleClickAdd.bind(this);
-	}
-
-	handleClickRemove(e) {
-		e.preventDefault();
-		if (this.state.totalAdults !== 0) {
-			
-			var newTotal = this.state.totalAdults - 1;
-			this.setState({
-				totalAdults: newTotal
-			}, () => this.props.changeTotal(-1))
-		}
-	}
-
-	handleClickAdd(e) {
-		e.preventDefault();
-
-		if (!this.props.maxReached) {
-			
-			var newTotal = this.state.totalAdults + 1;
-			this.setState({
-				totalAdults: newTotal
-			})
-
-			this.props.changeTotal(1)
-		}
+		
 	}
 
 	render() {
@@ -72,17 +43,17 @@ class AdultsCounter extends React.Component {
 				</div>
 				<div className="right">
 					<Counter>
-						<RemoveButtonSpan>
-							<IconContext.Provider value={this.state.totalAdults > 0 ? { color: '#128488', size: "3em" } : { color: '#B7DADB', size: "3em" }}>
-								<IoIosRemoveCircleOutline onClick={this.handleClickRemove}/>
+						<RemoveButtonSpan >
+							<IconContext.Provider value={this.props.currentAdults === 0 ? { color: '#B7DADB', size: "3em" } : { color: '#128488', size: "3em" }}>
+								<IoIosRemoveCircleOutline onClick={(e) => {this.props.handleIncrement("adults", -1)}}/>
 							</IconContext.Provider>
 						</RemoveButtonSpan>
 						<TotalSpan>
-							<span>{this.state.totalAdults}</span>
+							<span>{this.props.currentAdults}</span>
 						</TotalSpan>
 						<AddButtonSpan>
-							<IconContext.Provider value={this.props.maxReached ? { color: '#B7DADB', size: "3em" } : { color: '#128488', size: "3em" }}>
-								<IoIosAddCircleOutline onClick={this.handleClickAdd}/>
+							<IconContext.Provider value={this.props.limit? { color: '#B7DADB', size: "3em" } : { color: '#128488', size: "3em" }}>
+								<IoIosAddCircleOutline onClick={(e) => {this.props.handleIncrement("adults", 1)}}/>
 							</IconContext.Provider>
 						</AddButtonSpan>
 					</Counter>

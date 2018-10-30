@@ -4,19 +4,19 @@ import AdultsCounter from './AdultsCounter.jsx';
 import ChildrenCounter from './ChildrenCounter.jsx';
 import InfantCounter from './InfantCounter.jsx';
 
-
 class Guests extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			maxGuests: this.props.listing.max_guests,
-			maxReached: false,
-			currentGuests: 1,
-			dropDown: false
-
+			currentTotal: 1,
+			currentAdults: 1,
+			currentChildren: 0,
+			currentInfants: 0,
+			limit: null
 		}
 		this.handleClick = this.handleClick.bind(this);
-		this.changeTotal = this.changeTotal.bind(this);
+		this.handleIncrement = this.handleIncrement.bind(this);
 	}
 	
 	handleClick(e) {
@@ -33,29 +33,61 @@ class Guests extends React.Component {
 		this.setState({
 			dropDown: newDropDown
 		})
-
 	}
 
-	changeTotal(num) {
-		// console.log('oigogogogog');
+	handleIncrement(type, num) {
+		console.log('increment pressed with num =', num);
+		console.log('type: ', type);
 		if (num === 1) {
-			let oldTotal = this.state.currentGuests;
-			let newTotal = oldTotal + 1;
-			this.setState({
-				currentGuests: newTotal
-			}, () => {
-				if (this.state.currentGuests === this.state.maxGuests) {
+			if (this.state.currentTotal < this.state.maxGuests) {
+				if (type === "adults") {
+					var newAdultTotal = this.state.currentAdults + 1;
+					var newTotal = this.state.currentTotal + 1;
 					this.setState({
-						maxReached: true
+						currentAdults: newAdultTotal,
+						currentTotal: newTotal
+					})
+				} else if (type === "children") {
+					var newChildrenTotal = this.state.currentChildren + 1;
+					var newTotal = this.state.currentTotal + 1;
+					this.setState({
+						currentChildren: newChildrenTotal,
+						currentTotal: newTotal
+					})
+				} else if (type === "infants") {
+					var newInfantsTotal = this.state.currentInfants + 1;
+					var newTotal = this.state.currentTotal + 1;
+					this.setState({
+						currentInfants: newInfantsTotal,
+						currentTotal: newTotal
 					})
 				}
-			});
-			
+			}
 		} else if (num === -1) {
-			let newTotal = this.state.currentGuests - 1;
-			this.setState({
-				currentGuests: newTotal
-			})
+			if (this.state.currentTotal > 0) {
+				if (type === "adults") {
+					var newAdultTotal = this.state.currentAdults - 1;
+					var newTotal = this.state.currentTotal - 1;
+					this.setState({
+						currentAdults: newAdultTotal,
+						currentTotal: newTotal
+					})
+				} else if (type === "children") {
+					var newChildrenTotal = this.state.currentChildren -1;
+					var newTotal = this.state.currentTotal - 1;
+					this.setState({
+						currentChildren: newChildrenTotal,
+						currentTotal: newTotal
+					})
+				} else if (type === "infants") {
+					var newInfantsTotal = this.state.currentInfants - 1;
+					var newTotal = this.state.currentTotal - 1;
+					this.setState({
+						currentInfants: newInfantsTotal,
+						currentTotal: newTotal
+					})
+				}
+			}
 		}
 	}
 
@@ -86,23 +118,46 @@ class Guests extends React.Component {
 		margin-bottom: 50px;
 		`
 
+		const FooterDiv = styled.div`
+		position: absolute;
+		bottom: 0; 
+		`
+
 		return (
 			<div>
 				<H5>Guests</H5>
-				<CollapseButton onClick={this.handleClick} className="collapsible">{this.state.currentGuests} guests</CollapseButton>
+				<CollapseButton onClick={this.handleClick} className="collapsible">{this.state.currentTotal} guests</CollapseButton>
 				<div className="content">
 					<ContainerDiv>
-						<AdultsCounter maxReached={this.state.maxReached} changeTotal={this.changeTotal}/>
+						<AdultsCounter 
+							id="adults"
+							currentAdults={this.state.currentAdults}
+							handleIncrement={this.handleIncrement}
+							limit={this.state.maxGuests === this.state.currentTotal ? true : false}
+							min={this.state.currentAdults === 0 ? true : false}
+						/>
 					</ContainerDiv>
 					<ContainerDiv>
-						<ChildrenCounter />
+						<ChildrenCounter 
+							id="children"
+							currentChildren={this.state.currentChildren}
+							handleIncrement={this.handleIncrement}
+							limit={this.state.maxGuests === this.state.currentTotal ? true : false}
+							min={this.state.currentChildren === 0 ? true : false}
+						/>
 					</ContainerDiv>
 					<ContainerDiv>
-						<InfantCounter />
+						<InfantCounter 
+							id="infants"
+							currentInfants={this.state.currentInfants}
+							handleIncrement={this.handleIncrement}
+							limit={this.state.maxGuests === this.state.currentTotal ? true : false}
+							min={this.state.currentInfants === 0 ? true : false}
+						/>
 					</ContainerDiv>
-					<div>
+					{/* <div>
 						2 guests maximum. Infants don’t count toward the number of guests.
-					</div>
+					</div> */}
 					<br/>
 				</div>
 			</div>
