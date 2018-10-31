@@ -20,8 +20,6 @@ class Guests extends React.Component {
 	}
 	
 	handleClick(e) {
-		console.log('classss', e.target.classList);
-
 		var content = e.target.nextElementSibling;
 		if (content.style.display === "block") {
       content.style.display = "none";
@@ -32,8 +30,6 @@ class Guests extends React.Component {
 	}
 
 	handleIncrement(type, num) {
-		console.log('increment pressed with num =', num);
-		console.log('type: ', type);
 		if (num === 1) {
 			if (this.state.currentTotal < this.state.maxGuests) {
 				if (type === "adults") {

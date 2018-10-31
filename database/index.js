@@ -36,9 +36,6 @@ const getAllFromTable = (table, callback) => {
 }
 
 const getListing = (listingId, callback) => {
-
-	// console.log('database side', listing);
-
 	var sql = `select * from listings where id = ${listingId}`;
 
 	connection.query(sql, (err, result) => {
@@ -50,6 +47,19 @@ const getListing = (listingId, callback) => {
 	})
 }
 
+const getUnavailabilities = (listingId, callback) => {
+	var sql = `select * from unavailabilities where listing = ${listingId}`;
+
+	connection.query(sql, (err, result) => {
+		if (err) {
+			console.log(err);
+		} else {
+			callback(result)
+		}
+	})
+}
+
+
 // connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
 	//   if (error) throw error;
 	//   console.log('The solution is: ', results[0].solution);
@@ -59,3 +69,4 @@ module.exports.saveBooking = saveBooking;
 module.exports.connection = connection;
 module.exports.getAllFromTable = getAllFromTable;
 module.exports.getListing = getListing;
+module.exports.getUnavailabilities = getUnavailabilities;

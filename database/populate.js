@@ -18,15 +18,15 @@ var injectTestDataListings = () => {
 var injectTestDataUnavailabilities = () => {
 	connection.query(`
 	insert into unavailabilities 
-		(id, listing, month_day, booked) 
+		(id, listing, month_day_year, booked) 
 	values 
-		(1, (select id from listings where id = 2), 101, 1),
-		(2, (select id from listings where id = 2), 102, 1),
-		(3, (select id from listings where id = 2), 106, 1),
-		(4, (select id from listings where id = 2), 107, 0),
-		(5, (select id from listings where id = 2), 108, 0),
-		(6, (select id from listings where id = 2), 112, 1),
-		(7, (select id from listings where id = 2), 113, 1)
+		(1, (select id from listings where id = 2), '01-01-19', 1),
+		(2, (select id from listings where id = 2), '01-02-19', 1),
+		(3, (select id from listings where id = 2), '01-06-19', 1),
+		(4, (select id from listings where id = 2), '01-07-19', 0),
+		(5, (select id from listings where id = 2), '01-08-19', 0),
+		(6, (select id from listings where id = 2), '01-12-19', 1),
+		(7, (select id from listings where id = 2), '01-13-19', 1)
 	`, (err, result) => {
 		if (err) {
 			console.log(err);

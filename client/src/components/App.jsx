@@ -4,6 +4,7 @@ import Header from "./Header.jsx";
 import Dates from "./Dates.jsx";
 import Guests from "./Guests.jsx";
 import Special from "./Special.jsx";
+import Total from "./Total.jsx";
 import styled from "styled-components";
 
 class App extends React.Component {
@@ -12,7 +13,44 @@ class App extends React.Component {
 
 		this.state = {
 			listing: {},
-			unavailability: {}
+			unavailabilities: {},
+			totalGuests: 1,
+			totalDays: 0,
+			totalCost: 0,
+			showTotal: false
+		}
+
+		this.saveTotal = this.saveTotal.bind(this);
+		this.calculateTotal = this.calculateTotal.bind(this);
+	}
+
+	calculateTotal(days, guests = 1) {
+		var listing = this.state.listing;
+		var total = (listing.daily_rate * days);
+
+		total = total + this.state.listing.cleaning_fee + this.state.listing.service_fee;
+		console.log(total);
+		
+		this.setState({
+			totalCost: total
+		})
+		
+	}
+
+	saveTotal(type, num) {
+		if (type === 'guests') {
+			this.setState({
+				totalGuests: num
+			})
+		} else if (type === 'days') {
+			console.log('save total fires!', num)
+
+			this.calculateTotal(num);
+
+			this.setState({
+				totalDays: num,
+				showTotal: true
+			})
 		}
 	}
 
@@ -22,9 +60,16 @@ class App extends React.Component {
 		console.log('this id', id);
 
 		axios.get(`/listings/${id}`).then((res) => {
-			console.log('from server to front end', res.data[0]);
+			console.log('from server to front end, listing:', res.data[0]);
 			this.setState({
 				listing: res.data[0]
+			})
+		})
+
+		axios.get(`/unavailabilities/${id}`).then((res) => {
+			console.log('from server to front end, unavailabilities:', res.data);
+			this.setState({
+				unavailabilities: res.data
 			})
 		})
 	}
@@ -82,8 +127,20 @@ class App extends React.Component {
 					<Content>
 						<Header listing={this.state.listing}/><br/>
 						<Line />
-						<Dates /><br/>
+						<Dates 
+							saveTotal={this.saveTotal} 
+							listing={this.state.listing} 
+							unavailabilities={this.state.unavailabilities}
+						/>
+						<br/>
 						<Guests listing={this.state.listing}/>
+						<br/>
+						{this.state.showTotal ? 
+						<Total 
+							listing={this.state.listing}
+							totalCost={this.state.totalCost}
+						/> : <div></div>
+						}
 						<Button><Book>Request to Book</Book></Button>
 						<MemoDiv>You won't be charged yet</MemoDiv>
 						<BottomLine />

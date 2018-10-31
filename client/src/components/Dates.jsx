@@ -6,7 +6,6 @@ import moment from "moment";
 import './../styles/react_dates_overrides.css';
 import 'react-dates/lib/css/_datepicker.css';
 import styled from 'styled-components'
-// import H5 from '/styled-components/styledH5.jsx'
 
 class Dates extends React.Component {
 	constructor(props) {
@@ -14,9 +13,19 @@ class Dates extends React.Component {
 		this.state = {
 			checkIn: null,
 			checkOut: null,
-			focusedInput: null
+			focusedInput: null,
+			startDate: null,
+			endDate: null
 		}
+		this.handleDatesSet = this.handleDatesSet.bind(this);
 	}
+
+	handleDatesSet() {
+		if (this.state.startDate && this.state.endDate) {
+			var days = this.state.endDate.diff(this.state.startDate, 'days');
+			this.props.saveTotal('days', days);
+		}
+	}	
 
 	render() {
 
@@ -24,6 +33,12 @@ class Dates extends React.Component {
 		font-size: 12px;
 		margin-bottom: 200px;
 		`;		
+
+		// const datesList = this.props.unavailabilities.map(date => {
+		// 	return moment(date);
+		// });
+
+		// const isDayBlocked = 
 
 		return (
 			<div>
@@ -36,10 +51,17 @@ class Dates extends React.Component {
           startDate={this.state.startDate}
 					endDate={this.state.endDate}
 					numberOfMonths = {1}
-          onDatesChange={({ checkIn, checkOut }) => { this.setState({ checkIn, checkOut })}}
+          onDatesChange={({ startDate, endDate }) => { this.setState({ startDate, endDate }, () => {
+						this.handleDatesSet();
+					})}}
           focusedInput={this.state.focusedInput}
 					onFocusChange={(focusedInput) => { this.setState({ focusedInput })}}
 					hideKeyboardShortcutsPanel = {true}
+					minimumNights = {1}
+					block = {true}
+					showClearDates = {true}
+					// isOutsideRange = {(date) => date.year() !== 2018}
+					// isDayBlocked = {(day) => {return blockedDays.includes(day); }}
 				/>
 			</div>
 		)

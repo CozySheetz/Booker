@@ -6,6 +6,7 @@ const { injectTestDataListings } = require('./../database/populate.js');
 const { injectTestDataUnavailabilities } = require('./../database/populate.js');
 const { getAllFromTable } = require('./../database/index.js');
 const { getListing } = require('./../database/index.js');
+const { getUnavailabilities } = require('./../database/index.js');
 
 const app = express();
 const port = process.env.PORT || 3003;
@@ -17,13 +18,6 @@ app.use(morgan('dev'));
 // Routes:
 app.use(express.static(path.join(__dirname, '/../client/dist')));
 
-app.get('/sampleData', (req, res) => {
-  injectTestDataListings();
-  injectTestDataUnavailabilities();
-  console.log('sample data populated into database')
-  res.send('sample data populated into database');
-})
-
 app.get('/listings/:id', (req, res) => {
   var listingId = req.params.id;
 
@@ -34,18 +28,14 @@ app.get('/listings/:id', (req, res) => {
     
 })
 
-// app.get('/unavailabilities/:id', (req, res) => {
-//   var listingId = req.params.id;
+app.get('/unavailabilities/:id', (req, res) => {
+  var listingId = req.params.id;
 
-//   getListing(listingId, (data) => {
-//     console.log('data from db', data);
-//     res.send(data);
-//   });
+  getUnavailabilities(listingId, (data) => {
+    console.log('UNAVAILS from db', data);
+    res.send(data);
+  });
     
-// })
-  
-app.post('/check-in', (req, res) => {
-  
 })
 
 app.post('/book', (req, res) => {

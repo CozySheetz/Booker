@@ -27,7 +27,7 @@ CREATE TABLE listings (
 CREATE TABLE unavailabilities (
   id INT NOT NULL AUTO_INCREMENT,
 	listing INT,
-	month_day INT,
+	month_day_year VARCHAR(10),
 	booked INT,
 	PRIMARY KEY (id),
 	FOREIGN KEY (listing) REFERENCES listings(`id`)
