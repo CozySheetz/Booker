@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import AdultsCounter from './AdultsCounter.jsx';
 import ChildrenCounter from './ChildrenCounter.jsx';
 import InfantCounter from './InfantCounter.jsx';
+import OutsideClickHandler from 'react-outside-click-handler'; 
 
 class Guests extends React.Component {
 	constructor(props) {
@@ -35,6 +36,7 @@ class Guests extends React.Component {
 				if (type === "adults") {
 					var newAdultTotal = this.state.currentAdults + 1;
 					var newTotal = this.state.currentTotal + 1;
+
 					this.setState({
 						currentAdults: newAdultTotal,
 						currentTotal: newTotal
@@ -42,6 +44,7 @@ class Guests extends React.Component {
 				} else if (type === "children") {
 					var newChildrenTotal = this.state.currentChildren + 1;
 					var newTotal = this.state.currentTotal + 1;
+
 					this.setState({
 						currentChildren: newChildrenTotal,
 						currentTotal: newTotal
@@ -58,6 +61,7 @@ class Guests extends React.Component {
 				if (type === "adults") {
 					var newAdultTotal = this.state.currentAdults - 1;
 					var newTotal = this.state.currentTotal - 1;
+
 					this.setState({
 						currentAdults: newAdultTotal,
 						currentTotal: newTotal
@@ -65,6 +69,7 @@ class Guests extends React.Component {
 				} else if (type === "children") {
 					var newChildrenTotal = this.state.currentChildren -1;
 					var newTotal = this.state.currentTotal - 1;
+
 					this.setState({
 						currentChildren: newChildrenTotal,
 						currentTotal: newTotal
@@ -74,7 +79,6 @@ class Guests extends React.Component {
 					var newTotal = this.state.currentTotal - 1;
 					this.setState({
 						currentInfants: newInfantsTotal,
-						currentTotal: newTotal
 					})
 				}
 			}
@@ -118,37 +122,48 @@ class Guests extends React.Component {
 				<H5>Guests</H5>
 				<CollapseButton onClick={this.handleClick} className="collapsible">{this.state.currentTotal} guests</CollapseButton>
 				<div className="content">
-					<ContainerDiv>
-						<AdultsCounter 
-							id="adults"
-							currentAdults={this.state.currentAdults}
-							handleIncrement={this.handleIncrement}
-							limit={this.state.maxGuests === this.state.currentTotal ? true : false}
-							min={this.state.currentAdults === 0 ? true : false}
-						/>
-					</ContainerDiv>
-					<ContainerDiv>
-						<ChildrenCounter 
-							id="children"
-							currentChildren={this.state.currentChildren}
-							handleIncrement={this.handleIncrement}
-							limit={this.state.maxGuests === this.state.currentTotal ? true : false}
-							min={this.state.currentChildren === 0 ? true : false}
-						/>
-					</ContainerDiv>
-					<ContainerDiv>
-						<InfantCounter 
-							id="infants"
-							currentInfants={this.state.currentInfants}
-							handleIncrement={this.handleIncrement}
-							limit={this.state.maxGuests === this.state.currentTotal ? true : false}
-							min={this.state.currentInfants === 0 ? true : false}
-						/>
-					</ContainerDiv>
-					<ContainerDiv>
-						{this.state.maxGuests} guests maximum. Infants don’t count toward the number of guests.
-					</ContainerDiv>
-					<br/>
+					<OutsideClickHandler
+						onOutsideClick={(e) => {
+							var content = document.getElementsByClassName('content')[0];
+							if (content.style.display === "block") {
+								content.style.display = "none";
+								var currentTotal = this.state.currentTotal;
+								this.props.saveTotal('guests', currentTotal)
+							}
+						}}
+					>
+						<ContainerDiv>
+							<AdultsCounter 
+								id="adults"
+								currentAdults={this.state.currentAdults}
+								handleIncrement={this.handleIncrement}
+								limit={this.state.maxGuests === this.state.currentTotal ? true : false}
+								min={this.state.currentAdults === 0 ? true : false}
+							/>
+						</ContainerDiv>
+						<ContainerDiv>
+							<ChildrenCounter 
+								id="children"
+								currentChildren={this.state.currentChildren}
+								handleIncrement={this.handleIncrement}
+								limit={this.state.maxGuests === this.state.currentTotal ? true : false}
+								min={this.state.currentChildren === 0 ? true : false}
+							/>
+						</ContainerDiv>
+						<ContainerDiv>
+							<InfantCounter 
+								id="infants"
+								currentInfants={this.state.currentInfants}
+								handleIncrement={this.handleIncrement}
+								limit={this.state.maxGuests === this.state.currentTotal ? true : false}
+								min={this.state.currentInfants === 0 ? true : false}
+							/>
+						</ContainerDiv>
+						<ContainerDiv>
+							{this.state.maxGuests} guests maximum. Infants don’t count toward the number of guests.
+						</ContainerDiv>
+						<br/>
+					</OutsideClickHandler>
 				</div>
 			</div>
 		)

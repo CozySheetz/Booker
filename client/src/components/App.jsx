@@ -26,7 +26,10 @@ class App extends React.Component {
 
 	calculateTotal(days, guests = 1) {
 		var listing = this.state.listing;
-		var total = (listing.daily_rate * days);
+		days = days ? days : this.state.totalDays
+		guests = guests ? guests : this.state.totalGuests
+
+		var total = (listing.daily_rate * days * (guests * 1.3))
 
 		total = total + this.state.listing.cleaning_fee + this.state.listing.service_fee;
 		console.log(total);
@@ -39,11 +42,15 @@ class App extends React.Component {
 
 	saveTotal(type, num) {
 		if (type === 'guests') {
+			console.log('save total guests', num)
+
+			this.calculateTotal(num);
+
 			this.setState({
 				totalGuests: num
 			})
+
 		} else if (type === 'days') {
-			console.log('save total fires!', num)
 
 			this.calculateTotal(num);
 
@@ -136,7 +143,10 @@ class App extends React.Component {
 							unavailabilities={this.state.unavailabilities}
 						/>
 						<br/>
-						<Guests listing={this.state.listing}/>
+						<Guests 
+							listing={this.state.listing}
+							saveTotal={this.saveTotal}
+						/>
 						<br/>
 						{this.state.showTotal ? 
 						<Total 
