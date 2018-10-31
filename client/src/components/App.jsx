@@ -17,7 +17,9 @@ class App extends React.Component {
 			totalGuests: 1,
 			totalDays: 0,
 			totalCost: 0,
-			showTotal: false
+			showTotal: false, 
+			startDate: null,
+			endDate: null
 		}
 
 		this.saveTotal = this.saveTotal.bind(this);
@@ -34,8 +36,6 @@ class App extends React.Component {
 		}
 
 		var total = (Math.floor(listing.daily_rate * days * guests))
-
-		console.log('total before fees', total);
 		
 		this.setState({
 			totalCost: total
@@ -57,7 +57,7 @@ class App extends React.Component {
 			
 		}
 	}
-
+	
 	componentDidMount() {
 		var url = window.location.href;
 		var id = url.slice(22);
