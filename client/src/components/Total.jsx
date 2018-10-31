@@ -27,13 +27,35 @@ class Total extends React.Component {
 		margin-bottom: 200px;
 		`;		
 
+		const FeeContainer = styled.div`
+		font-size: 12px;
+		font-weight: 300;
+		`;
+
+		const TotalContainer = styled.div`
+		font-size: 12px;
+		font-weight: bold;
+		`;
+
+		const Line = styled.div`
+		border-bottom: 1px solid #E4E4E4;
+		margin-bottom: 8px;
+		margin-top: 8px;
+		`;
+
+		const SubTotal = styled.span`
+		float: right;
+		`
+
 		return (
 			<div>
-				<H5>Total</H5><br/>
-				<div>{this.state.dailyRate}</div>
-				<div>{this.state.cleaningFee}</div>
-				<div>{this.state.serviceFee}</div>
-				<div>{this.props.totalCost}</div>
+				<FeeContainer>${this.state.dailyRate} x {this.props.totalDays} night{this.props.totalDays > 1 ? 's' : ''}<SubTotal>{this.props.totalCost}</SubTotal></FeeContainer>
+				<Line />
+				<FeeContainer>Cleaning fee<SubTotal>${this.state.cleaningFee}</SubTotal></FeeContainer>
+				<Line />
+				<FeeContainer>Service fee<SubTotal>${this.state.serviceFee}</SubTotal></FeeContainer>
+				<Line />
+				<TotalContainer>Total <SubTotal>${this.props.totalCost + this.state.cleaningFee + this.state.serviceFee}</SubTotal></TotalContainer>
 			</div>
 		)
 	}

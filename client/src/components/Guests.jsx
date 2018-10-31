@@ -48,10 +48,8 @@ class Guests extends React.Component {
 					})
 				} else if (type === "infants") {
 					var newInfantsTotal = this.state.currentInfants + 1;
-					var newTotal = this.state.currentTotal + 1;
 					this.setState({
 						currentInfants: newInfantsTotal,
-						currentTotal: newTotal
 					})
 				}
 			}

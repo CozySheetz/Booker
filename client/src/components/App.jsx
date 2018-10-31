@@ -125,7 +125,10 @@ class App extends React.Component {
 			<div>
 				<Box>
 					<Content>
-						<Header listing={this.state.listing}/><br/>
+						<Header 
+							listing={this.state.listing}
+							totalCost={this.state.totalCost}
+						/><br/>
 						<Line />
 						<Dates 
 							saveTotal={this.saveTotal} 
@@ -139,6 +142,7 @@ class App extends React.Component {
 						<Total 
 							listing={this.state.listing}
 							totalCost={this.state.totalCost}
+							totalDays={this.state.totalDays}
 						/> : <div></div>
 						}
 						<Button><Book>Request to Book</Book></Button>

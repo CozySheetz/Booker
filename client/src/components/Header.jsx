@@ -21,7 +21,7 @@ class Header extends React.Component {
 		return (
 			<div>
 				<div>
-					<Rate>${this.props.listing.daily_rate}</Rate> per night
+					<Rate>${this.props.totalCost !== 0 ? this.props.totalCost : this.props.listing.daily_rate}</Rate> per night
 				</div>
 				<div>
 					<StarRatingComponent 
