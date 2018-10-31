@@ -11,8 +11,6 @@ class Dates extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			checkIn: null,
-			checkOut: null,
 			focusedInput: null,
 			startDate: null,
 			endDate: null
@@ -29,9 +27,9 @@ class Dates extends React.Component {
 
 	render() {
 
-		const H5 = styled.span`
+		const H5 = styled.div`
 		font-size: 12px;
-		margin-bottom: 200px;
+		margin-bottom: 5px;
 		`;		
 
 		// const datesList = this.props.unavailabilities.map(date => {
@@ -42,7 +40,7 @@ class Dates extends React.Component {
 
 		return (
 			<div>
-				<H5>Dates</H5><br/>
+				<H5>Dates</H5>
 				<DateRangePicker
 					startDateId="startDate"
 					endDateId="endDate"
@@ -60,6 +58,7 @@ class Dates extends React.Component {
 					minimumNights = {1}
 					block = {true}
 					showClearDates = {true}
+					minimumNights = {1}
 					// isOutsideRange = {(date) => date.year() !== 2018}
 					// isDayBlocked = {(day) => {return blockedDays.includes(day); }}
 				/>

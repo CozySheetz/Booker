@@ -18,6 +18,7 @@ class Guests extends React.Component {
 		}
 		this.handleClick = this.handleClick.bind(this);
 		this.handleIncrement = this.handleIncrement.bind(this);
+		// this.handleSubmit = this.handleSubmit.bind(this);
 	}
 	
 	handleClick(e) {
@@ -27,7 +28,6 @@ class Guests extends React.Component {
     } else {
       content.style.display = "block";
 		}
-		
 	}
 
 	handleIncrement(type, num) {
@@ -85,11 +85,16 @@ class Guests extends React.Component {
 		}
 	}
 
+	// handleSubmit(e) {
+	// 	e.preventDefault();
+	// 	this.props.saveTotal('guests', 5)
+	// }
+
 	render() {
 
-		const H5 = styled.span`
+		const H5 = styled.div`
 		font-size: 12px;
-		margin-bottom: 200px;
+		margin-bottom: 5px;
 		`;
 
 		const CollapseButton = styled.button`
@@ -120,13 +125,14 @@ class Guests extends React.Component {
 		return (
 			<div>
 				<H5>Guests</H5>
-				<CollapseButton onClick={this.handleClick} className="collapsible">{this.state.currentTotal} guests</CollapseButton>
+				<CollapseButton onClick={this.handleClick} className="collapsible">{this.props.totalGuests} guests</CollapseButton>
 				<div className="content">
 					<OutsideClickHandler
 						onOutsideClick={(e) => {
+							e.preventDefault();
 							var content = document.getElementsByClassName('content')[0];
 							if (content.style.display === "block") {
-								content.style.display = "none";
+								content.style.display = "none";	
 								var currentTotal = this.state.currentTotal;
 								this.props.saveTotal('guests', currentTotal)
 							}
@@ -163,6 +169,7 @@ class Guests extends React.Component {
 							{this.state.maxGuests} guests maximum. Infants don’t count toward the number of guests.
 						</ContainerDiv>
 						<br/>
+						<button onClick={this.handleSubmit}></button>
 					</OutsideClickHandler>
 				</div>
 			</div>

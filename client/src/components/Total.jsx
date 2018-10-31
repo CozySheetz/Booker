@@ -11,14 +11,7 @@ import styled from 'styled-components'
 class Total extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			dailyRate: this.props.listing.daily_rate,
-			cleaningFee: this.props.listing.cleaning_fee,
-			serviceFee: this.props.listing.service_fee, 
-		}
 	}
-
-	
 
 	render() {
 
@@ -49,13 +42,13 @@ class Total extends React.Component {
 
 		return (
 			<div>
-				<FeeContainer>${this.state.dailyRate} x {this.props.totalDays} night{this.props.totalDays > 1 ? 's' : ''}<SubTotal>{this.props.totalCost}</SubTotal></FeeContainer>
+				<FeeContainer>${this.props.listing.daily_rate} x {this.props.totalDays} night{this.props.totalDays > 1 ? 's' : ''}<SubTotal>${this.props.totalCost}</SubTotal></FeeContainer>
 				<Line />
-				<FeeContainer>Cleaning fee<SubTotal>${this.state.cleaningFee}</SubTotal></FeeContainer>
+				<FeeContainer>Cleaning fee<SubTotal>${this.props.listing.cleaning_fee}</SubTotal></FeeContainer>
 				<Line />
-				<FeeContainer>Service fee<SubTotal>${this.state.serviceFee}</SubTotal></FeeContainer>
+				<FeeContainer>Service fee<SubTotal>${this.props.listing.service_fee}</SubTotal></FeeContainer>
 				<Line />
-				<TotalContainer>Total <SubTotal>${this.props.totalCost + this.state.cleaningFee + this.state.serviceFee}</SubTotal></TotalContainer>
+				<TotalContainer>Total <SubTotal>${this.props.totalCost + this.props.listing.cleaning_fee + this.props.listing.service_fee}</SubTotal></TotalContainer>
 			</div>
 		)
 	}
