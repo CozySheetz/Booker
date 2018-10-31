@@ -2,9 +2,6 @@ const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
 const bodyParser = require('body-parser');
-const { injectTestDataListings } = require('./../database/populate.js');
-const { injectTestDataUnavailabilities } = require('./../database/populate.js');
-const { getAllFromTable } = require('./../database/index.js');
 const { getListing } = require('./../database/index.js');
 const { getUnavailabilities } = require('./../database/index.js');
 
