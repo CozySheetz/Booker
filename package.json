@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "react-dev": "webpack -d --watch",
+    "react": "webpack-dev-server --mode-production",
     "server-dev": "nodemon server/index.js",
-    "seed": "mysql -u root < database/bookerSchema.sql && node seed.js",
+    "seed": "mysql -u  -p < database/bookerSchema.sql && node seed.js",
     "test": "jest",
     "test:watch": "jest --watch"
   },
@@ -21,52 +22,50 @@
   },
   "homepage": "https://github.com/CozySheetz/Booker#readme",
   "dependencies": {
+    "axios": "^0.18.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.4",
     "moment": "^2.22.2",
+    "morgan": "^1.9.1",
     "mysql": "^2.16.0",
     "nodemon": "^1.18.4",
-    "puppeteer": "^1.9.0",
     "react": "^16.5.0",
     "react-dates": "^18.1.1",
     "react-dom": "^16.5.0",
-    "react-dropdown-tree-select": "^1.13.0",
     "react-icons": "^3.2.2",
-    "react-minimal-dropdown": "^1.3.2",
     "react-outside-click-handler": "^1.2.2",
     "react-router-dom": "4.3.1",
-    "react-simple-dropdown": "^3.2.3",
-    "react-star-rating": "^1.4.2",
     "react-star-rating-component": "^1.4.1",
-    "reactjs-dropdown-component": "^1.0.5",
-    "styled-components": "^4.0.2"
+    "styled-components": "^4.0.2",
+    "webpack": "^2.2.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-visualizer-plugin": "^0.1.11"
   },
   "devDependencies": {
-    "axios": "^0.18.0",
-    "babel-core": "6.26.3",
     "babel-jest": "^23.6.0",
-    "babel-loader": "7.1.5",
-    "babel-preset-es2015": "6.24.1",
-    "babel-preset-react": "6.24.1",
-    "body-parser": "^1.18.3",
-    "cors": "^2.8.4",
     "css-loader": "^1.0.0",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.6.0",
     "enzyme-to-json": "^3.3.4",
-    "express": "^4.16.4",
     "express-fileupload": "^0.4.0",
     "hard-source-webpack-plugin": "^0.12.0",
     "jest": "^23.6.0",
-    "morgan": "^1.9.0",
     "pg": "^7.4.3",
     "shuffle-array": "^1.0.1",
-    "style-loader": "^0.23.1",
-    "webpack": "2.2.1",
-    "webpack-cli": "^3.1.0",
-    "webpack-visualizer-plugin": "^0.1.11"
+    "style-loader": "^0.23.1"
   },
   "jest": {
     "setupTestFrameworkScriptFile": "./__tests__/setup/setupEnzyme.js",
-    "testPathIgnorePatterns": ["./__tests__/setup/"],
-    "snapshotSerializers": ["enzyme-to-json/serializer"]
+    "testPathIgnorePatterns": [
+      "./__tests__/setup/"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
   }
 }
