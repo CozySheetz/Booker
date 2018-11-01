@@ -47,3 +47,6 @@ CREATE TABLE bookings (
 );
 
 -- mysql -u root < database/bookerSchema.sql
+
+
+-- mysql -h booker.cp4l5wq0pfkx.us-east-2.rds.amazonaws.com -P 3306 -u kapolyak -p Hrnyc18!
