@@ -42,13 +42,13 @@ class Total extends React.Component {
 
 		return (
 			<div>
-				<FeeContainer>${this.props.listing.daily_rate} x {this.props.totalDays} night{this.props.totalDays > 1 ? 's' : ''}<SubTotal>${this.props.totalCost}</SubTotal></FeeContainer>
+				<FeeContainer>${this.props.listing.daily_rate} x {this.props.totalDays} night{this.props.totalDays > 1 ? 's' : ''}<SubTotal>${this.props.totalCostBeforeFees}</SubTotal></FeeContainer>
 				<Line />
 				<FeeContainer>Cleaning fee<SubTotal>${this.props.listing.cleaning_fee}</SubTotal></FeeContainer>
 				<Line />
 				<FeeContainer>Service fee<SubTotal>${this.props.listing.service_fee}</SubTotal></FeeContainer>
 				<Line />
-				<TotalContainer>Total <SubTotal>${this.props.totalCost + this.props.listing.cleaning_fee + this.props.listing.service_fee}</SubTotal></TotalContainer>
+				<TotalContainer>Total <SubTotal>${this.props.totalCost}</SubTotal></TotalContainer>
 			</div>
 		)
 	}

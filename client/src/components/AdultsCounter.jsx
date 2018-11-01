@@ -7,7 +7,6 @@ import { IconContext } from "react-icons";
 class AdultsCounter extends React.Component {
 	constructor(props) {
 		super(props);
-		
 	}
 
 	render() {
@@ -37,7 +36,7 @@ class AdultsCounter extends React.Component {
 		`
 
 		return (
-			<div>
+			<div className="flex-container">
 				<div className="left">
 					<Name>Adults</Name>
 				</div>

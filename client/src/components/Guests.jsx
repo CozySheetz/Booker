@@ -125,7 +125,7 @@ class Guests extends React.Component {
 		return (
 			<div>
 				<H5>Guests</H5>
-				<CollapseButton onClick={this.handleClick} className="collapsible">{this.props.totalGuests} guests</CollapseButton>
+				<CollapseButton onClick={this.handleClick} className="collapsible">{this.state.currentTotal} guests</CollapseButton>
 				<div className="content">
 					<OutsideClickHandler
 						onOutsideClick={(e) => {
@@ -137,7 +137,7 @@ class Guests extends React.Component {
 								this.props.saveTotal('guests', currentTotal)
 							}
 						}}
-					>
+					>	
 						<ContainerDiv>
 							<AdultsCounter 
 								id="adults"
@@ -169,7 +169,6 @@ class Guests extends React.Component {
 							{this.state.maxGuests} guests maximum. Infants don’t count toward the number of guests.
 						</ContainerDiv>
 						<br/>
-						<button onClick={this.handleSubmit}></button>
 					</OutsideClickHandler>
 				</div>
 			</div>

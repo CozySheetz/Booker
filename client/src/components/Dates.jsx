@@ -22,6 +22,7 @@ class Dates extends React.Component {
 		if (this.state.startDate && this.state.endDate) {
 			var days = this.state.endDate.diff(this.state.startDate, 'days');
 			this.props.saveTotal('days', days);
+			this.props.saveStartEnd(this.state.startDate, this.state.endDate);
 		}
 	}	
 

@@ -16,6 +16,7 @@ class App extends React.Component {
 			unavailabilities: {},
 			totalGuests: 1,
 			totalDays: 0,
+			totalCostBeforeFees: 0,
 			totalCost: 0,
 			showTotal: false, 
 			startDate: null,
@@ -24,6 +25,12 @@ class App extends React.Component {
 
 		this.saveTotal = this.saveTotal.bind(this);
 		this.calculateTotal = this.calculateTotal.bind(this);
+		this.bookListing = this.bookListing.bind(this);
+		this.saveStartEnd = this.saveStartEnd.bind(this);
+	}
+
+	bookListing() {
+
 	}
 
 	calculateTotal(days, guests) {
@@ -35,12 +42,20 @@ class App extends React.Component {
 			guests = 1.3 
 		}
 
-		var total = (Math.floor(listing.daily_rate * days * guests))
-		
+		var totalCostBeforeFees = (Math.floor(listing.daily_rate * days * guests))
+		var totalCost = totalCostBeforeFees + this.state.listing.service_fee + this.state.listing.cleaning_fee
 		this.setState({
-			totalCost: total
+			totalCostBeforeFees: totalCostBeforeFees,
+			totalCost: totalCost
 		})
 		
+	}
+
+	saveStartEnd(startDate, endDate) {
+		this.setState({
+			startDate: startDate,
+			endDate: endDate
+		})
 	}
 
 	saveTotal(type, num) {
@@ -138,6 +153,7 @@ class App extends React.Component {
 							saveTotal={this.saveTotal} 
 							listing={this.state.listing} 
 							unavailabilities={this.state.unavailabilities}
+							saveStartEnd={this.saveStartEnd}
 						/>
 						<br/>
 						<Guests 
@@ -149,11 +165,12 @@ class App extends React.Component {
 						{this.state.showTotal ? 
 						<Total 
 							listing={this.state.listing}
-							totalCost={this.state.totalCost}
+							totalCostBeforeFees={this.state.totalCostBeforeFees}
 							totalDays={this.state.totalDays}
+							totalCost={this.state.totalCost}
 						/> : <div></div>
 						}
-						<Button><Book>Request to Book</Book></Button>
+						<Button onClick={this.bookListing}><Book>Request to Book</Book></Button>
 						<MemoDiv>You won't be charged yet</MemoDiv>
 						<BottomLine />
 						<Special listing={this.state.listing}/>

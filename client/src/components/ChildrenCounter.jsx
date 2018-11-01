@@ -37,7 +37,7 @@ class ChildrenCounter extends React.Component {
 		`
 
 		return (
-			<div>
+			<div className="flex-container">
 				<div className="left">
 					<Name>Children</Name>
 				</div>
