@@ -25,13 +25,16 @@ class App extends React.Component {
 
 		this.saveTotal = this.saveTotal.bind(this);
 		this.calculateTotal = this.calculateTotal.bind(this);
-		this.bookListing = this.bookListing.bind(this);
+		// this.bookListing = this.bookListing.bind(this);
 		this.saveStartEnd = this.saveStartEnd.bind(this);
 	}
 
-	bookListing() {
-
-	}
+	// bookListing() {
+	// 	axios.post('/book', {
+	// 		listing: this.state.listing.id,
+	// 		tot
+	// 	})
+	// }
 
 	calculateTotal(days, guests) {
 		var listing = this.state.listing;
@@ -135,10 +138,6 @@ class App extends React.Component {
 		text-align: center;
 		font-weight: 400;
 		`
-		// const MainContainer = styled.container`
-		// margin-top: 16px
-		// margin-bottom: 24px
-		// `;
 
 		return (
 			<div>
@@ -150,6 +149,8 @@ class App extends React.Component {
 						/><br/>
 						<Line />
 						<Dates 
+							startDate={this.state.startDate}
+							endDate={this.state.endDate}
 							saveTotal={this.saveTotal} 
 							listing={this.state.listing} 
 							unavailabilities={this.state.unavailabilities}

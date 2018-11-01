@@ -35,14 +35,15 @@ CREATE TABLE unavailabilities (
 
 CREATE TABLE bookings (
 	id INT NOT NULL AUTO_INCREMENT,
-	listing INT,
+	listing_id INT,
 	start_day INT,
 	end_day INT,
 	adults INT,
 	children INT,
 	infants INT,
+	total_cost INT,
 	PRIMARY KEY (id),
-	FOREIGN KEY (listing) REFERENCES listings(`id`) 
+	FOREIGN KEY (listing_id) REFERENCES listings(`id`) 
 );
 
 -- mysql -u root < database/bookerSchema.sql

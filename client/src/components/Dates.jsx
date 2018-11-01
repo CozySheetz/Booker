@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import 'react-dates/initialize';
 import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
 import moment from "moment";
@@ -13,7 +12,8 @@ class Dates extends React.Component {
 		this.state = {
 			focusedInput: null,
 			startDate: null,
-			endDate: null
+			endDate: null,
+			datesSubmitted: false
 		}
 		this.handleDatesSet = this.handleDatesSet.bind(this);
 	}
@@ -23,6 +23,9 @@ class Dates extends React.Component {
 			var days = this.state.endDate.diff(this.state.startDate, 'days');
 			this.props.saveTotal('days', days);
 			this.props.saveStartEnd(this.state.startDate, this.state.endDate);
+			this.setState({
+				datesSubmitted: true
+			})
 		}
 	}	
 

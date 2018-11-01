@@ -11,8 +11,8 @@ var connection = mysql.createConnection({
 connection.connect();
 
 const saveBooking = (booking, callback) => {
-  var sql = `insert into bookings (id, etc) values (?, ?)` 
-	var input = [x, y];
+  var sql = `insert into bookings (id, listing_id, start_day, end_day, adults, children, infants, total_cost) values (?, ?, ?, ?, ?, ?, ?)` 
+	var input = booking;
 
 	connection.query(sql, input, (err, result) => {
 		if (err) {
@@ -58,7 +58,6 @@ const getUnavailabilities = (listingId, callback) => {
 		}
 	})
 }
-
 
 // connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
 	//   if (error) throw error;

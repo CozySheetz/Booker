@@ -14,19 +14,27 @@ class Guests extends React.Component {
 			currentAdults: 1,
 			currentChildren: 0,
 			currentInfants: 0,
-			limit: null
+			limit: null,
+			panelVisible: false
 		}
 		this.handleClick = this.handleClick.bind(this);
 		this.handleIncrement = this.handleIncrement.bind(this);
+		this.handleOutsideClick = this.handleOutsideClick.bind(this);
 		// this.handleSubmit = this.handleSubmit.bind(this);
 	}
 	
 	handleClick(e) {
 		var content = e.target.nextElementSibling;
 		if (content.style.display === "block") {
-      content.style.display = "none";
+			content.style.display = "none";
+			this.setState({
+				panelVisible: false
+			})
     } else {
-      content.style.display = "block";
+			content.style.display = "block";
+			this.setState({
+				panelVisible: true
+			})
 		}
 	}
 
@@ -59,13 +67,15 @@ class Guests extends React.Component {
 		} else if (num === -1) {
 			if (this.state.currentTotal > 0) {
 				if (type === "adults") {
-					var newAdultTotal = this.state.currentAdults - 1;
-					var newTotal = this.state.currentTotal - 1;
+					if (this.state.currentAdults > 0) {
+						var newAdultTotal = this.state.currentAdults - 1;
+						var newTotal = this.state.currentTotal - 1;
 
-					this.setState({
-						currentAdults: newAdultTotal,
-						currentTotal: newTotal
-					})
+						this.setState({
+							currentAdults: newAdultTotal,
+							currentTotal: newTotal
+						})
+					}
 				} else if (type === "children") {
 					var newChildrenTotal = this.state.currentChildren -1;
 					var newTotal = this.state.currentTotal - 1;
@@ -83,6 +93,11 @@ class Guests extends React.Component {
 				}
 			}
 		}
+	}
+
+	handleOutsideClick(e, total) {
+		console.log('fire')
+		this.props.saveTotal('guests', total);
 	}
 
 	// handleSubmit(e) {
@@ -117,15 +132,15 @@ class Guests extends React.Component {
 		padding-bottom: 30px;
 		`
 
-		const FooterDiv = styled.div`
-		position: absolute;
-		bottom: 0; 
+		const ButtonText = styled.span`
+		font-weight: 300;
+		font-size: 16px;
 		`
 
 		return (
 			<div>
 				<H5>Guests</H5>
-				<CollapseButton onClick={this.handleClick} className="collapsible">{this.state.currentTotal} guests</CollapseButton>
+				<CollapseButton onClick={this.handleClick} className="collapsible"><ButtonText>{this.state.panelVisible ? this.state.currentTotal : this.props.totalGuests} guests</ButtonText></CollapseButton>
 				<div className="content">
 					<OutsideClickHandler
 						onOutsideClick={(e) => {
@@ -133,8 +148,11 @@ class Guests extends React.Component {
 							var content = document.getElementsByClassName('content')[0];
 							if (content.style.display === "block") {
 								content.style.display = "none";	
+								this.setState({
+									panelVisible: false
+								})
 								var currentTotal = this.state.currentTotal;
-								this.props.saveTotal('guests', currentTotal)
+								this.handleOutsideClick(e, currentTotal);
 							}
 						}}
 					>	

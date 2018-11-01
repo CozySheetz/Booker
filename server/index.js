@@ -4,6 +4,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const { getListing } = require('./../database/index.js');
 const { getUnavailabilities } = require('./../database/index.js');
+const { saveBooking } = require('./../database/index.js');
 
 const app = express();
 const port = process.env.PORT || 3003;
@@ -36,7 +37,10 @@ app.get('/unavailabilities/:id', (req, res) => {
 })
 
 app.post('/book', (req, res) => {
-  
+  console.log('req', req.body)
+  saveBooking(booking, (response) => {
+    res.send(response);
+  })
 })
 
 app.get('/*', (req, res) => {
