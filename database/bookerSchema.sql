@@ -4,12 +4,6 @@ CREATE DATABASE booker;
 
 USE booker;
 
--- CREATE TABLE specials (
--- 	id INT NOT NULL AUTO_INCREMENT,
--- 	content VARCHAR(200),
--- 	PRIMARY KEY (id)
--- );
-
 CREATE TABLE listings (
   id INT NOT NULL AUTO_INCREMENT,
   daily_rate INT,
@@ -21,7 +15,6 @@ CREATE TABLE listings (
 	max_guests INT NOT NULL,
 	ratings_count INT,
 	PRIMARY KEY (id)
-	-- FOREIGN KEY (special_flag) REFERENCES specials(`id`)
 );
 
 CREATE TABLE unavailabilities (
@@ -45,6 +38,5 @@ CREATE TABLE bookings (
 );
 
 -- mysql -u root < database/bookerSchema.sql
-
 
 -- mysql -h booker.cp4l5wq0pfkx.us-east-2.rds.amazonaws.com -P 3306 -u kapolyak -p
