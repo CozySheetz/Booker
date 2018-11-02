@@ -6,6 +6,7 @@ import Guests from "./Guests.jsx";
 import Special from "./Special.jsx";
 import Total from "./Total.jsx";
 import styled from "styled-components";
+import moment from 'moment'
 
 class App extends React.Component {
 	constructor(props) {
@@ -27,14 +28,8 @@ class App extends React.Component {
 		this.calculateTotal = this.calculateTotal.bind(this);
 		// this.bookListing = this.bookListing.bind(this);
 		this.saveStartEnd = this.saveStartEnd.bind(this);
+		this.transformUnavailabilities = this.transformUnavailabilities.bind(this);
 	}
-
-	// bookListing() {
-	// 	axios.post('/book', {
-	// 		listing: this.state.listing.id,
-	// 		tot
-	// 	})
-	// }
 
 	calculateTotal(days, guests) {
 		var listing = this.state.listing;
@@ -90,11 +85,38 @@ class App extends React.Component {
 
 		axios.get(`/unavailabilities/${id}`).then((res) => {
 			console.log('from server to front end, unavailabilities:', res.data);
+			
+			var unavails = res.data;
+			var unavailsFunc = this.transformUnavailabilities(unavails)			
+
 			this.setState({
-				unavailabilities: res.data
+				unavailabilities: res.data,
+				isDayBlocked: unavailsFunc
 			})
+			
 		})
 	}
+
+	transformUnavailabilities(data) {
+		var unavailabilities = data;
+		
+		var result = unavailabilities.map((unavailability) => {
+			return moment(unavailability.month_day_year)
+		})
+		console.log('array or moments?', result);
+
+		var isDayBlocked = day => result.filter(d => d.isSame(day, 'day')).length > 0;
+		console.log('func that is days blocked', isDayBlocked);
+
+		return isDayBlocked;
+	}
+
+		// bookListing() {
+	// 	axios.post('/book', {
+	// 		listing: this.state.listing.id,
+	// 		tot
+	// 	})
+	// }
 
 	render() {
 		const Box = styled.section`
@@ -155,6 +177,7 @@ class App extends React.Component {
 							listing={this.state.listing} 
 							unavailabilities={this.state.unavailabilities}
 							saveStartEnd={this.saveStartEnd}
+							isDayBlocked={this.state.isDayBlocked}
 						/>
 						<br/>
 						<Guests 
