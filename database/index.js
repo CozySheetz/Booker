@@ -1,11 +1,6 @@
 var mysql = require('mysql');
-
-var connection = mysql.createConnection({
-	host : 'localhost',
-	user : 'root',
-	password : '',
-	database : 'booker'
-})
+var { connection } = require('./configRDS.js');
+// var { connection } = require('./configLOCAL.js');
  
 connection.connect();
 

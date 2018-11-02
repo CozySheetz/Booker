@@ -20,6 +20,9 @@ build/Release
 # bundle.js
 client/dist/bundle.js
 
+#AWS pem
+hrnyc18.pem
+
 # Dependency directories
 node_modules/
 jspm_packages/
