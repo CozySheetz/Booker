@@ -41,14 +41,14 @@ var injectTestDataUnavailabilities = () => {
 	})
 }
 
-var generateListingsData = () => {
-	var results = [];
-	for (var i = 0; i < 100; i++) {
-		var listing = [];
-		listing.push(i);
+// var generateListingsData = () => {
+// 	var results = [];
+// 	for (var i = 0; i < 100; i++) {
+// 		var listing = [];
+// 		listing.push(i);
 
-	}	
-}
+// 	}	
+// }
 
 
 module.exports.injectTestDataListings = injectTestDataListings;

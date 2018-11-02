@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const { getListing } = require('./../database/index.js');
 const { getUnavailabilities } = require('./../database/index.js');
 const { saveBooking } = require('./../database/index.js');
@@ -12,6 +13,7 @@ const port = process.env.PORT || 3003;
 // Middleware:
 app.use(bodyParser.json());
 app.use(morgan('dev'));
+app.use(cors());
 
 // Routes:
 app.use(express.static(path.join(__dirname, '/../client/dist')));
@@ -19,9 +21,14 @@ app.use(express.static(path.join(__dirname, '/../client/dist')));
 app.get('/listings/:id', (req, res) => {
   var listingId = req.params.id;
 
-  getListing(listingId, (data) => {
-    console.log('data from db', data);
-    res.send(data);
+  getListing(listingId, (data, err) => {
+    if (err) {
+      console.log('listing api error:', err)
+    } else {
+
+      console.log('data from db', data);
+      res.send(data);
+    }
   });
     
 })

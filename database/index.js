@@ -1,13 +1,20 @@
 var mysql = require('mysql');
 
 // set up connection
+// var connection = mysql.createConnection({
+// 	host     : 'booker.cp4l5wq0pfkx.us-east-2.rds.amazonaws.com',
+// 	port     : 3306,
+//   user     : 'kennethpolyak',
+//   password : 'Hrnyc18!',
+//   database : 'booker'
+// });
+
 var connection = mysql.createConnection({
-	host     : 'booker.cp4l5wq0pfkx.us-east-2.rds.amazonaws.com',
-	port     : 3306,
-  user     : 'kennethpolyak',
-  password : 'Hrnyc18!',
-  database : 'booker'
-});
+	host : 'localhost',
+	user : 'root',
+	password : '',
+	database : 'booker'
+})
  
 connection.connect();
 
@@ -29,9 +36,9 @@ const getAllFromTable = (table, callback) => {
 	
 	connection.query(sql, (err, result) => {
 		if (err) {
-			console.log(err);
+			callback(null, err);
 		} else {
-			callback(result);
+			callback(result, null);
 		}
 	})
 }
@@ -41,7 +48,7 @@ const getListing = (listingId, callback) => {
 
 	connection.query(sql, (err, result) => {
 		if (err) {
-			console.log(err);
+			callback(null, err);
 		} else {
 			callback(result)
 		}
