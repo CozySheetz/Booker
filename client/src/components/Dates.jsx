@@ -36,16 +36,15 @@ class Dates extends React.Component {
 		margin-bottom: 5px;
 		`;		
 
-		// const datesList = this.props.unavailabilities.map(date => {
-		// 	return moment(date);
-		// });
+		var test = [moment('11-10-2018')];  
+		// const isDayBlocked = day => result.filter(d => d.isSame(day, 'day')).length > 0;
 
-		// const isDayBlocked = 
 
 		return (
 			<div>
 				<H5>Dates</H5>
 				<DateRangePicker
+					isDayBlocked={this.props.isDayBlocked}
 					startDateId="startDate"
 					endDateId="endDate"
 					startDatePlaceholderText = "Check in"
