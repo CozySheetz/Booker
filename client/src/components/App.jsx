@@ -78,7 +78,7 @@ class App extends React.Component {
 	}
 
 	fetchRawData() {
-		var id = window.location.pathname.slice(1)
+		var id = window.location.pathname;
 		console.log(window.location);
 		console.log('this id', id);
 
