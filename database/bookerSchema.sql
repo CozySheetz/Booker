@@ -36,12 +36,10 @@ CREATE TABLE unavailabilities (
 CREATE TABLE bookings (
 	id INT NOT NULL AUTO_INCREMENT,
 	listing_id INT,
-	start_day INT,
-	end_day INT,
-	adults INT,
-	children INT,
-	infants INT,
+	start_day VARCHAR(10),
+	end_day VARCHAR(10),
 	total_cost INT,
+	total_guests INT,
 	PRIMARY KEY (id),
 	FOREIGN KEY (listing_id) REFERENCES listings(`id`) 
 );
@@ -49,4 +47,4 @@ CREATE TABLE bookings (
 -- mysql -u root < database/bookerSchema.sql
 
 
--- mysql -h booker.cp4l5wq0pfkx.us-east-2.rds.amazonaws.com -P 3306 -u kapolyak -p Hrnyc18!
+-- mysql -h booker.cp4l5wq0pfkx.us-east-2.rds.amazonaws.com -P 3306 -u kapolyak -p

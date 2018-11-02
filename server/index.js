@@ -6,6 +6,8 @@ const cors = require('cors');
 const { getListing } = require('./../database/index.js');
 const { getUnavailabilities } = require('./../database/index.js');
 const { saveBooking } = require('./../database/index.js');
+const { saveUnavailabilities } = require('./../database/index.js');
+const moment = require('moment');
 
 const app = express();
 const port = process.env.PORT || 3003;
@@ -43,10 +45,54 @@ app.get('/unavailabilities/:id', (req, res) => {
     
 })
 
-app.post('/book', (req, res) => {
-  console.log('req', req.body)
-  saveBooking(booking, (response) => {
-    res.send(response);
+app.post('/bookings', (req, res) => {
+  console.log('reqqqq', req.body.start_day.slice(0, 10))
+  var data = req.body;
+
+  //condition start day for db
+  var start_day = data.start_day.slice(0, 10).split('-').reverse();
+  start_day[2].slice(2);
+  var temp = start_day[0];
+  start_day[0] = start_day[1];
+  start_day[1] = temp;
+  start_day = start_day.join('-');
+  console.log('AFTER WORKRKR', start_day)
+  
+  // condition end day for db
+  var end_day = data.end_day.slice(0, 10).split('-').reverse();
+  end_day[2].slice(2);
+  var temp = end_day[0];
+  end_day[0] = end_day[1];
+  end_day[1] = temp;
+  end_day = end_day.join('-');
+
+  // condition unavails for db
+  var unavailabilities = []
+  var start_moment = moment(start_day, "MM-DD-YYYY");
+  var end_moment = moment(end_day, "MM-DD-YYYY");
+  
+  var dates = []
+  while (start_moment <= end_moment) {
+    dates.push(start_moment.toDate());
+    start_moment = start_moment.clone().add(1, 'd');
+  }
+  
+  for (var i = 0; i < dates.length; i++) {
+    console.log('one date', moment(dates[i]).format("MM-DD-YY"))
+    var date = moment(dates[i]).format("MM-DD-YY");
+    unavailabilities.push([data.listing_id, date, 1])
+  }
+
+  console.log('ASDFAWEFAWEFAWE', unavailabilities);
+
+  // save booking and unavailabilities to db
+  var booking = [];
+  booking.push(data.listing_id, start_day, end_day, data.total_cost, data.total_guests)
+
+  saveBooking(booking, (response1) => {
+    saveUnavailabilities(unavailabilities, (response2) => {
+      res.send()
+    });
   })
 })
 

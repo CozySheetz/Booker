@@ -8,7 +8,7 @@
     "react": "webpack-dev-server --mode-production",
     "server-dev": "nodemon server/index.js",
     "server": "node server/index.js",
-    "seed-dev": "mysql -u  -p < database/bookerSchema.sql && node seed.js",
+    "seed-dev": "mysql -u root < database/bookerSchema.sql && node seed.js",
     "seed": "mysql -h booker.cp4l5wq0pfkx.us-east-2.rds.amazonaws.com -P 3306 -u kennethpolyak -p < database/bookerSchema.sql && node seed.js",
     "test": "jest",
     "test:watch": "jest --watch"

@@ -36,10 +36,6 @@ class Dates extends React.Component {
 		margin-bottom: 5px;
 		`;		
 
-		var test = [moment('11-10-2018')];  
-		// const isDayBlocked = day => result.filter(d => d.isSame(day, 'day')).length > 0;
-
-
 		return (
 			<div>
 				<H5>Dates</H5>
@@ -62,8 +58,6 @@ class Dates extends React.Component {
 					block = {true}
 					showClearDates = {true}
 					minimumNights = {1}
-					// isOutsideRange = {(date) => date.year() !== 2018}
-					// isDayBlocked = {(day) => {return blockedDays.includes(day); }}
 				/>
 			</div>
 		)

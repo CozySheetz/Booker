@@ -29,6 +29,8 @@ class App extends React.Component {
 		// this.bookListing = this.bookListing.bind(this);
 		this.saveStartEnd = this.saveStartEnd.bind(this);
 		this.transformUnavailabilities = this.transformUnavailabilities.bind(this);
+		this.handleBooking = this.handleBooking.bind(this);
+		this.fetchRawData = this.fetchRawData.bind(this);
 	}
 
 	calculateTotal(days, guests) {
@@ -72,6 +74,10 @@ class App extends React.Component {
 	}
 	
 	componentDidMount() {
+		this.fetchRawData();
+	}
+
+	fetchRawData() {
 		var url = window.location.href;
 		var id = url.slice(22);
 		console.log('this id', id);
@@ -103,20 +109,23 @@ class App extends React.Component {
 		var result = unavailabilities.map((unavailability) => {
 			return moment(unavailability.month_day_year)
 		})
-		console.log('array or moments?', result);
 
 		var isDayBlocked = day => result.filter(d => d.isSame(day, 'day')).length > 0;
-		console.log('func that is days blocked', isDayBlocked);
-
 		return isDayBlocked;
 	}
 
-		// bookListing() {
-	// 	axios.post('/book', {
-	// 		listing: this.state.listing.id,
-	// 		tot
-	// 	})
-	// }
+	handleBooking() {
+		axios.post('/bookings', {	
+			listing_id: this.state.listing.id,
+			start_day: this.state.startDate,
+			end_day: this.state.endDate,
+			total_cost: this.state.totalCost,
+			total_guests: this.state.totalGuests,
+			total_days: this.state.totalDays
+		}).then(() => {
+			this.fetchRawData();
+		})
+	}
 
 	render() {
 		const Box = styled.section`
@@ -194,7 +203,7 @@ class App extends React.Component {
 							totalCost={this.state.totalCost}
 						/> : <div></div>
 						}
-						<Button onClick={this.bookListing}><Book>Request to Book</Book></Button>
+						<Button onClick={this.handleBooking}><Book>Request to Book</Book></Button>
 						<MemoDiv>You won't be charged yet</MemoDiv>
 						<BottomLine />
 						<Special listing={this.state.listing}/>

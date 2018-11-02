@@ -96,6 +96,7 @@ class Guests extends React.Component {
 	}
 
 	handleOutsideClick(e, total) {
+		e.preventDefault();
 		console.log('fire')
 		this.props.saveTotal('guests', total);
 	}
