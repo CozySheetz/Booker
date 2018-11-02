@@ -3,11 +3,11 @@ const morgan = require('morgan');
 const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const moment = require('moment');
 const { getListing } = require('./../database/index.js');
 const { getUnavailabilities } = require('./../database/index.js');
 const { saveBooking } = require('./../database/index.js');
 const { saveUnavailabilities } = require('./../database/index.js');
-const moment = require('moment');
 
 const app = express();
 const port = process.env.PORT || 3003;
@@ -27,7 +27,6 @@ app.get('/listings/:id', (req, res) => {
     if (err) {
       console.log('listing api error:', err)
     } else {
-
       console.log('data from db', data);
       res.send(data);
     }
@@ -46,7 +45,6 @@ app.get('/unavailabilities/:id', (req, res) => {
 })
 
 app.post('/bookings', (req, res) => {
-  console.log('reqqqq', req.body.start_day.slice(0, 10))
   var data = req.body;
 
   //condition start day for db
@@ -56,7 +54,6 @@ app.post('/bookings', (req, res) => {
   start_day[0] = start_day[1];
   start_day[1] = temp;
   start_day = start_day.join('-');
-  console.log('AFTER WORKRKR', start_day)
   
   // condition end day for db
   var end_day = data.end_day.slice(0, 10).split('-').reverse();
@@ -78,12 +75,9 @@ app.post('/bookings', (req, res) => {
   }
   
   for (var i = 0; i < dates.length; i++) {
-    console.log('one date', moment(dates[i]).format("MM-DD-YY"))
     var date = moment(dates[i]).format("MM-DD-YY");
     unavailabilities.push([data.listing_id, date, 1])
   }
-
-  console.log('ASDFAWEFAWEFAWE', unavailabilities);
 
   // save booking and unavailabilities to db
   var booking = [];
@@ -96,10 +90,8 @@ app.post('/bookings', (req, res) => {
   })
 })
 
-app.get('/*', (req, res) => {
-  var uri = req.url.slice(1);
-  console.log('GET where * = ', uri)
-
+app.get('/rooms/*', (req, res) => {
+  res.setHeader('content-type', 'text/html');
   res.sendFile(path.join(__dirname + '/../client/dist/index.html'));
 })
 
