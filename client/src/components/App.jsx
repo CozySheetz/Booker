@@ -79,7 +79,7 @@ class App extends React.Component {
 
 	fetchRawData() {
 		var id = window.location.pathname.slice(1)
-
+		console.log(window.location);
 		console.log('this id', id);
 
 		axios.get(`/listings/${id}`).then((res) => {
