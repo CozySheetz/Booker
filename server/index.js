@@ -38,7 +38,6 @@ app.get('/unavailabilities/:id', (req, res) => {
   var listingId = req.params.id;
 
   getUnavailabilities(listingId, (data) => {
-    console.log('UNAVAILS from db', data);
     res.send(data);
   });
     

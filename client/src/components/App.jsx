@@ -79,10 +79,7 @@ class App extends React.Component {
 
 	fetchRawData() {
 		var path = window.location.href;
-		console.log('PATH', path);
 		var splits = path.split('/');
-		console.log('TEST LOG');
-		console.log('splits', splits);
 		var id = parseInt(splits[splits.length-1]);
 		console.log('this id', id);
 	
