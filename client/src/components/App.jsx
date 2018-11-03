@@ -26,7 +26,6 @@ class App extends React.Component {
 
 		this.saveTotal = this.saveTotal.bind(this);
 		this.calculateTotal = this.calculateTotal.bind(this);
-		// this.bookListing = this.bookListing.bind(this);
 		this.saveStartEnd = this.saveStartEnd.bind(this);
 		this.transformUnavailabilities = this.transformUnavailabilities.bind(this);
 		this.handleBooking = this.handleBooking.bind(this);
@@ -84,15 +83,12 @@ class App extends React.Component {
 		console.log('this id', id);
 	
 		axios.get(`http://18.219.227.74/listings/${id}`).then((res) => {
-			console.log('from server to front end, listing:', res.data[0]);
 			this.setState({
 				listing: res.data[0]
 			})
 		})
 
 		axios.get(`http://18.219.227.74/unavailabilities/${id}`).then((res) => {
-			console.log('from server to front end, unavailabilities:', res.data);
-			
 			var unavails = res.data;
 			var unavailsFunc = this.transformUnavailabilities(unavails)			
 

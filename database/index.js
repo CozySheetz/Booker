@@ -7,7 +7,6 @@ connection.connect();
 const saveBooking = (booking, callback) => {
   var sql = `insert into bookings (listing_id, start_day, end_day, total_cost, total_guests) values (?, ?, ?, ?, ?)` 
 	var input = booking;
-	console.log('INPUT AT DB', input)
 
 	connection.query(sql, input, (err, result) => {
 		if (err) {
@@ -59,7 +58,6 @@ const saveUnavailabilities = (unavailabilities, callback) => {
 	
 	for (var i = 0; i < inputs.length; i++) {
 		var input = inputs[i];
-		console.log('INPUTTTTT', input);
 
 		var sql = `insert into unavailabilities (listing, month_day_year, booked) values (?, ?, ?)
 		` 
