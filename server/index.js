@@ -20,7 +20,7 @@ app.use(cors());
 // Routes:
 app.use(express.static(path.join(__dirname, '/../client/dist')));
 
-app.get('/listings:id', (req, res) => {
+app.get('/listings/:id', (req, res) => {
   var listingId = req.params.id;
 
   getListing(listingId, (data, err) => {

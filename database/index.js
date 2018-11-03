@@ -55,19 +55,7 @@ const getUnavailabilities = (listingId, callback) => {
 }
 
 const saveUnavailabilities = (unavailabilities, callback) => {
-
-	// var inputs = unavailabilities.map((unavail) => {
-	// 	return unavail.join(', ')
-	// })
-
 	var inputs = unavailabilities;
-
-	// var sqlInput = '';
-	// input.forEach((unavailability) => {
-	// 	sqlInput += `(${unavailability})`
-	// })
-
-	console.log('INPUT AT DB UNAVAILS', inputs)
 	
 	for (var i = 0; i < inputs.length; i++) {
 		var input = inputs[i];
