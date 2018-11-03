@@ -129,7 +129,7 @@ class App extends React.Component {
 		padding: 2em
 		border: 1px solid
 		border-color: #E4E4E4
-		width: 326px
+		width: 380px;
 		`;
 
 		const Content = styled.section`
