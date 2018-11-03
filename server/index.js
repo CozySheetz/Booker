@@ -20,7 +20,7 @@ app.use(cors());
 // Routes:
 app.use(express.static(path.join(__dirname, '/../client/dist')));
 
-app.get('/listings/:id', (req, res) => {
+app.get('http://18.219.227.74/listings:id', (req, res) => {
   var listingId = req.params.id;
 
   getListing(listingId, (data, err) => {
@@ -34,7 +34,7 @@ app.get('/listings/:id', (req, res) => {
     
 })
 
-app.get('/unavailabilities/:id', (req, res) => {
+app.get('http://18.219.227.74/unavailabilities/:id', (req, res) => {
   var listingId = req.params.id;
 
   getUnavailabilities(listingId, (data) => {
@@ -44,7 +44,7 @@ app.get('/unavailabilities/:id', (req, res) => {
     
 })
 
-app.post('/bookings', (req, res) => {
+app.post('http://18.219.227.74/bookings', (req, res) => {
   var data = req.body;
 
   //condition start day for db
@@ -90,7 +90,7 @@ app.post('/bookings', (req, res) => {
   })
 })
 
-app.get('/rooms/*', (req, res) => {
+app.get('http://18.219.227.74/rooms/*', (req, res) => {
   res.setHeader('content-type', 'text/html');
   res.sendFile(path.join(__dirname + '/../client/dist/index.html'));
 })
