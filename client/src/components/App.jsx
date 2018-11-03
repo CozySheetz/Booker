@@ -81,15 +81,11 @@ class App extends React.Component {
 		var path = window.location.href;
 		console.log('PATH', path);
 		var splits = path.split('/');
-
+		console.log('TEST LOG');
 		console.log('splits', splits);
 		var id = parseInt(splits[splits.length-1]);
 		console.log('this id', id);
-
-		if (!Number(id)) {
-			console.log('not a numbeR!');
-		}
-
+	
 		axios.get(`/listings/${id}`).then((res) => {
 			console.log('from server to front end, listing:', res.data[0]);
 			this.setState({
