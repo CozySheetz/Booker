@@ -85,7 +85,7 @@ class App extends React.Component {
 		axios.get(`http://18.219.227.74/listings/${id}`).then((res) => {
 			this.setState({
 				listing: res.data[0]
-			})
+			}, () => console.log("HIHIHIIHIH ZEEENNNNN:", 'state', this.state.listing, 'res.data', res.data))
 		})
 
 		axios.get(`http://18.219.227.74/unavailabilities/${id}`).then((res) => {
