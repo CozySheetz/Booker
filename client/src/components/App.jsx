@@ -86,14 +86,14 @@ class App extends React.Component {
 		var id = parseInt(splits[splits.length-1]);
 		console.log('this id', id);
 	
-		axios.get(`http://18.219.227.74/listings/${id}`).then((res) => {
+		axios.get(`/listings/${id}`).then((res) => {
 			console.log('from server to front end, listing:', res.data[0]);
 			this.setState({
 				listing: res.data[0]
 			})
 		})
 
-		axios.get(`http://18.219.227.74/unavailabilities/${id}`).then((res) => {
+		axios.get(`/unavailabilities/${id}`).then((res) => {
 			console.log('from server to front end, unavailabilities:', res.data);
 			
 			var unavails = res.data;
@@ -119,7 +119,7 @@ class App extends React.Component {
 	}
 
 	handleBooking() {
-		axios.post('http://18.219.227.74/bookings', {	
+		axios.post('/bookings', {	
 			listing_id: this.state.listing.id,
 			start_day: this.state.startDate,
 			end_day: this.state.endDate,
