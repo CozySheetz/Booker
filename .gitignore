@@ -18,10 +18,11 @@ pids
 build/Release
 
 # bundle.js
-# client/dist/bundle.js
+client/dist/bundle.js
 
-#AWS pem
+#AWS
 hrnyc18.pem
+database/configRDS.js
 
 # Dependency directories
 node_modules/
