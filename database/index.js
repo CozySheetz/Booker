@@ -1,6 +1,6 @@
 var mysql = require('mysql');
-var { connection } = require('./configRDS.js');
-// var { connection } = require('./configLOCAL.js');
+// var { connection } = require('./configRDS.js');
+var { connection } = require('./configLOCAL.js');
  
 connection.connect();
 
