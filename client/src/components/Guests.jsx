@@ -20,7 +20,6 @@ class Guests extends React.Component {
 		this.handleClick = this.handleClick.bind(this);
 		this.handleIncrement = this.handleIncrement.bind(this);
 		this.handleOutsideClick = this.handleOutsideClick.bind(this);
-		// this.handleSubmit = this.handleSubmit.bind(this);
 	}
 	
 	handleClick(e) {
@@ -97,14 +96,8 @@ class Guests extends React.Component {
 
 	handleOutsideClick(e, total) {
 		e.preventDefault();
-		console.log('fire')
 		this.props.saveTotal('guests', total);
 	}
-
-	// handleSubmit(e) {
-	// 	e.preventDefault();
-	// 	this.props.saveTotal('guests', 5)
-	// }
 
 	render() {
 

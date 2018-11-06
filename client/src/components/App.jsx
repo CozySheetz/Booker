@@ -76,28 +76,32 @@ class App extends React.Component {
 		this.fetchRawData();
 	}
 
-	// http://18.219.227.74/
+	// public ip for api path in production env: http://18.219.227.74/
 	fetchRawData() {
 		var path = window.location.href;
 		var splits = path.split('/');
 		var id = parseInt(splits[splits.length-1]);
-		console.log('this id', id);
 	
-		axios.get(`/listings/${id}`).then((res) => {
-			this.setState({
-				listing: res.data[0]
-			})
-		})
+		axios.get(`/listings/${id}`)
+			.then((res) => {
+				this.setState({
+					listing: res.data[0]
+				})
+		}).catch((error) => {
+			console.log(error);
+		});
 
-		axios.get(`/unavailabilities/${id}`).then((res) => {
-			var unavails = res.data;
-			var unavailsFunc = this.transformUnavailabilities(unavails)			
+		axios.get(`/unavailabilities/${id}`)
+			.then((res) => {
+				var unavails = res.data;
+				var unavailsFunc = this.transformUnavailabilities(unavails)			
 
-			this.setState({
-				unavailabilities: res.data,
-				isDayBlocked: unavailsFunc
-			})
-			
+				this.setState({
+					unavailabilities: res.data,
+					isDayBlocked: unavailsFunc
+				})
+		}).catch((error) => {
+			console.log(error)
 		})
 	}
 
@@ -113,7 +117,7 @@ class App extends React.Component {
 	}
 
 	handleBooking() {
-		axios.post('/bookings', {	
+		axios.post('/bookings/', {	
 			listing_id: this.state.listing.id,
 			start_day: this.state.startDate,
 			end_day: this.state.endDate,
