@@ -1,12 +1,8 @@
 import React from "react";
-import axios from "axios";
 import 'react-dates/initialize';
-import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
-import moment from "moment";
 import './../styles/react_dates_overrides.css';
 import 'react-dates/lib/css/_datepicker.css';
 import styled from 'styled-components'
-// import H5 from '/styled-components/styledH5.jsx'
 
 class Total extends React.Component {
 	constructor(props) {
@@ -40,15 +36,27 @@ class Total extends React.Component {
 		float: right;
 		`
 
+		const {
+      listing: {
+        daily_rate,
+				cleaning_fee,
+				service_fee
+			},
+			totalDays,
+			totalCost,
+
+    } = this.props;
+
 		return (
+
 			<div>
-				<FeeContainer>${this.props.listing.daily_rate} x {this.props.totalDays} night{this.props.totalDays > 1 ? 's' : ''}<SubTotal>${this.props.totalCost}</SubTotal></FeeContainer>
+				<FeeContainer>${daily_rate} x {totalDays} night{totalDays > 1 ? 's' : ''}<SubTotal>${totalCost}</SubTotal></FeeContainer>
 				<Line />
-				<FeeContainer>Cleaning fee<SubTotal>${this.props.listing.cleaning_fee}</SubTotal></FeeContainer>
+				<FeeContainer>Cleaning fee<SubTotal>${cleaning_fee}</SubTotal></FeeContainer>
 				<Line />
-				<FeeContainer>Service fee<SubTotal>${this.props.listing.service_fee}</SubTotal></FeeContainer>
+				<FeeContainer>Service fee<SubTotal>${service_fee}</SubTotal></FeeContainer>
 				<Line />
-				<TotalContainer>Total <SubTotal>${this.props.totalCost + this.props.listing.cleaning_fee + this.props.listing.service_fee}</SubTotal></TotalContainer>
+				<TotalContainer>Total <SubTotal>${totalCost + cleaning_fee + service_fee}</SubTotal></TotalContainer>
 			</div>
 		)
 	}
