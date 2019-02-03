@@ -76,11 +76,10 @@ class App extends React.Component {
 		this.fetchRawData();
 	}
 
-	// public ip for api path in production env: http://18.219.227.74/
 	fetchRawData() {
-		var path = window.location.href;
-		var splits = path.split('/');
-		var id = parseInt(splits[splits.length-1]);
+		let path = window.location.href;
+		let splits = path.split('/');
+		let id = parseInt(splits[splits.length-1]);
 	
 		axios.get(`/listings/${id}`)
 			.then((res) => {
@@ -93,8 +92,8 @@ class App extends React.Component {
 
 		axios.get(`/unavailabilities/${id}`)
 			.then((res) => {
-				var unavails = res.data;
-				var unavailsFunc = this.transformUnavailabilities(unavails)			
+				let unavails = res.data;
+				let unavailsFunc = this.transformUnavailabilities(unavails)			
 
 				this.setState({
 					unavailabilities: res.data,

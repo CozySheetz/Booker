@@ -12,16 +12,15 @@ const { saveUnavailabilities } = require('./../database/index.js');
 const app = express();
 const port = process.env.PORT || 3003;
 
-// Middleware:
+// Express Middleware:
 app.use(bodyParser.json());
 app.use(morgan('dev'));
 app.use(cors());
-
-// Routes:
 app.use(express.static(path.join(__dirname, '/../client/dist')));
 
+// API Routes
 app.get('/listings/:id', (req, res) => {
-  var listingId = req.params.id;
+  let listingId = req.params.id;
 
   getListing(listingId, (data, err) => {
     if (err) {
@@ -35,7 +34,7 @@ app.get('/listings/:id', (req, res) => {
 })
 
 app.get('/unavailabilities/:id', (req, res) => {
-  var listingId = req.params.id;
+  let listingId = req.params.id;
 
   getUnavailabilities(listingId, (data) => {
     res.send(data);
@@ -96,7 +95,7 @@ app.get('/rooms/*', (req, res) => {
 
 // set up port connection
 app.listen(port, function() {
-  console.log('listening on port 3003!');
+  console.log(`listening on port ${port}!`);
 });
   
   

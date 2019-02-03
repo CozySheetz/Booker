@@ -4,6 +4,7 @@
   "description": "Booking component for Cozy Sheetz",
   "main": "index.js",
   "scripts": {
+    "start-dev": "webpack -d && node server/index.js",
     "react-dev": "webpack -d --watch",
     "react": "webpack -d",
     "server-dev": "nodemon server/index.js",
