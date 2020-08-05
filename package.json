@@ -56,7 +56,7 @@
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.6.0",
     "enzyme-to-json": "^3.3.4",
-    "express-fileupload": "^0.4.0",
+    "express-fileupload": "^1.1.9",
     "hard-source-webpack-plugin": "^0.12.0",
     "jest": "^23.6.0",
     "pg": "^7.4.3",
